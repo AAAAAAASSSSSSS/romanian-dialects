@@ -1,23 +1,82 @@
-import {DIALECTS,RULES} from "./rules.js"; import {toDialect,toIPA} from "./engine.js";
-const S="Cine bine fierbe piatra zi de zi.";
-const T={ro:{title:"Graiuri românești",sub:"Text în română standard → cum sună într-un grai",std:"Română standard",dia:"Grai",written:"Scris (ortografie)",pron:"Pronunție (IPA aprox.)",changes:"Schimbări aplicate",none:"Nu sunt încă reguli verificate pentru acest grai.",ph:"Scrie un text…",status:{sourced:"cu sursă",unverified:"neverificat"}},
- en:{title:"Romanian Graiuri",sub:"Standard Romanian text → how it sounds in a dialect",std:"Standard Romanian",dia:"Dialect",written:"Written (orthography)",pron:"Pronounced (approx. IPA)",changes:"Changes applied",none:"No verified rules for this dialect yet.",ph:"Type some text…",status:{sourced:"sourced",unverified:"unverified"}}};
+import {DIALECTS,GROUPS} from "./dialects.js"; import {RULES} from "./rules.js"; import {toDialect,toIPA} from "./engine.js";
+import {SOURCES,READ_LABEL} from "./sources.js"; import {EXAMPLES,TYPES} from "./examples.js"; import {RESEARCH,FAMILY,LOG} from "./research.js";
 const $=id=>document.getElementById(id);
-function detect(){const s=localStorage.getItem("lang"); if(s) return s;
- const l=(navigator.languages||[navigator.language||""]).some(x=>/^ro/i.test(x));
- const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||"";
- return (l||/Bucharest|Chisinau/.test(tz))?"ro":"en";}
-let lang=detect();
-function render(){const t=T[lang]; document.documentElement.lang=lang;
- $("title").textContent=t.title;$("sub").textContent=t.sub;$("l-std").textContent=t.std;$("l-dia").textContent=t.dia;
- $("l-w").textContent=t.written;$("l-p").textContent=t.pron;$("l-c").textContent=t.changes;$("in").placeholder=t.ph;$("lang").textContent=lang==="ro"?"EN":"RO";
- const sel=$("dia"),cur=sel.value; sel.innerHTML=Object.entries(DIALECTS).map(([k,d])=>`<option value="${k}">${d[lang]}</option>`).join(""); if(cur) sel.value=cur;
- update();}
-function update(){const t=T[lang],id=$("dia").value,d=DIALECTS[id],src=$("in").value;
- const w=toDialect(src,id); $("w").textContent=w; $("p").textContent=src?toIPA(w):"";
- let h=d.note?`<p>${d.note}</p>`:"";
- h+=d.rules.length?"<ul>"+d.rules.map(r=>{const R=RULES[r];return `<li>${R[lang]} <em>(${R.ex})</em> — ${t.status[R.status]}${R.src?` [${R.src}]`:""}</li>`}).join("")+"</ul>":(d.special?"":`<p>${t.none}</p>`);
- $("c").innerHTML=h;}
-$("in").value=S; $("in").oninput=update; $("dia").onchange=update;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const SAMPLES=["Dimineața, băiatul a venit cu pâine și brânză, apoi a fiert cinci ouă pentru cină.","Mâine merg la piață să cumpăr pește, vin și puțină brânză, dar nu știu când mă întorc.","Fratele meu a luat pâinea și a mers cu câinele după lemne, dar s-a întors seara.","Seara, fetele mele vin acasă, mănâncă pâine cu miere și se uită la televizor."];
+const T={
+ ro:{title:"Graiuri românești",sub:"Scrie un text în română standard și vezi cum ar suna într-un grai. Pentru fiecare regulă poți vedea sursa, zona studiată și cât de sigură e.",std:"Text în română standard",dia:"Grai",
+  w:"Cum sună (transcriere simplificată)",wh:"literele speciale: vezi legenda",p:"IPA (aproximativ)",ph:"Scrie un text…",sample:"↻ Alt exemplu",legend:"Cum citești literele speciale",
+  changes:"Ce se schimbă în acest grai",none:"Nu sunt reguli redabile în scris pentru acest grai.",area:"Zona",diff:"Ce îl deosebește",ex:"Exemple",so:"Surse",
+  status:{sourced:"din sursă",extended:"extins",approx:"aproximare"},statusTip:{sourced:"Schimbarea și exemplele sunt în sursă.",extended:"Același tipar ca într-o regulă din sursă, aplicat la forme pe care sursa nu le dă.",approx:"Sursa cere informație (de ex. accentul) pe care programul nu o vede; regula e o euristică."},
+  tabs:{src:"Surse (A–Z)",res:"Cercetare",log:"Verificare"},resFor:"Cercetare pentru:",lastRead:"Cum am citit-o",cite:"Citare",covers:"Ce conține",areaS:"Unde s-a cules",caveat:"Rezerve",open:"Deschide sursa",usedBy:"Folosită în reguli:",
+  exFor:"Exemple pentru:",tryIt:"Pune textul în câmp",none2:"Nu am exemple pentru acest grai.",noteRule:"Notă:",ruleCount:n=>n+" reguli",
+  intro:"Exemple reale, găsite (nu inventate de aplicație). Se schimbă odată cu graiul ales."},
+ en:{title:"Romanian dialects",sub:"Type standard Romanian and see how it might sound in a dialect. For every rule you can see the source, the area studied and how certain it is.",std:"Standard Romanian text",dia:"Dialect",
+  w:"How it sounds (simplified respelling)",wh:"special letters: see the legend",p:"IPA (approximate)",ph:"Type some text…",sample:"↻ Another example",legend:"How to read the special letters",
+  changes:"What changes in this dialect",none:"No rules that can be shown in writing for this dialect.",area:"Area",diff:"What sets it apart",ex:"Examples",so:"Sources",
+  status:{sourced:"sourced",extended:"extended",approx:"approximation"},statusTip:{sourced:"The change and its examples are in the source.",extended:"The same pattern as a sourced rule, applied to forms the source does not list.",approx:"The source needs information (e.g. stress) the program cannot see; the rule is a heuristic."},
+  tabs:{src:"Sources (A–Z)",res:"Research",log:"Verification"},resFor:"Research for:",lastRead:"How I read it",cite:"Citation",covers:"What it covers",areaS:"Where it was collected",caveat:"Caveats",open:"Open the source",usedBy:"Used by rules:",
+  exFor:"Examples for:",tryIt:"Put this text in the box",none2:"I have no examples for this dialect.",noteRule:"Note:",ruleCount:n=>n+" rules",
+  intro:"Real examples, found (not made up by the app). They change with the chosen dialect."}
+};
+const LEG=[["ć đ","tʃʲ dʒʲ","ro: „ci”, „gi” moi (Banat)","soft “ci”, “gi” (Banat)"],["ń ĺ ŕ","nʲ lʲ rʲ","n, l, r muiate","softened n, l, r"],["ʲ","","după literă: pronunție „muiată”, cu un i foarte scurt","after a letter: “softened”, with a very short i"],["ʰ","","o suflare de aer (aspirat): pʰ","a puff of air (aspirated): pʰ"],["ĥ","ɦʲ","un h sonor, muiat","a voiced, softened h"],["ł","ɫ","l „gros” (Oaș)","“dark” l (Oaș)"],["é","ɛ","e deschis (avea→avé)","open e (avea→avé)"],["î, â","ɨ","ca în „cînd”","as in Romanian “cînd”"],["ș, ț, ă","ʃ ts ə","ca în română","as in Romanian"]];
+let lang=(()=>{const s=localStorage.getItem("lang");if(s)return s;const l=(navigator.languages||[navigator.language||""]).some(x=>/^ro/i.test(x));const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||"";return(l||/Bucharest|Chisinau/.test(tz))?"ro":"en";})();
+let sampleI=0, panel=null, tab="src", pending=null;
+const L=o=>o[lang];
+function fillSelect(){const sel=$("dia"),cur=localStorage.getItem("dia")||sel.value||"muntenesc";
+ sel.innerHTML=Object.entries(GROUPS).map(([g,gd])=>`<optgroup label="${esc(L(gd))}">`+Object.entries(DIALECTS).filter(([,d])=>d.group===g).map(([k,d])=>`<option value="${k}">${esc(L(d))}</option>`).join("")+"</optgroup>").join("");
+ sel.value=DIALECTS[cur]?cur:"muntenesc";}
+function chips(keys){return keys.map(k=>`<button class="chip" data-src="${k}">${esc(SOURCES[k].label)}</button>`).join("");}
+function render(){const t=T[lang];document.documentElement.lang=lang;
+ $("title").textContent=t.title;$("sub").textContent=t.sub;$("l-std").textContent=t.std;$("l-dia").textContent=t.dia;$("l-w").textContent=t.w;$("h-w").textContent=t.wh;$("l-p").textContent=t.p;
+ $("in").placeholder=t.ph;$("sample").textContent=t.sample;$("l-leg").textContent=t.legend;$("l-c").textContent=t.changes;$("lang").textContent=lang==="ro"?"EN":"RO";
+ $("b-ex").textContent="📖 "+t.ex;$("b-so").textContent="📚 "+t.so;
+ $("legend-body").innerHTML="<table>"+LEG.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${lang==="ro"?r[2]:r[3]}</td></tr>`).join("")+"</table>";
+ fillSelect();update();if(panel)drawPanel();}
+function update(){const t=T[lang],id=$("dia").value,d=DIALECTS[id],src=$("in").value;localStorage.setItem("dia",id);
+ $("w").textContent=toDialect(src,id);$("p").textContent=src?toIPA(toDialect(src,id)):"";
+ $("info").innerHTML=`<h3>${esc(t.area)}</h3><p>${esc(L(d.area))}</p><h3>${esc(t.diff)}</h3><p>${esc(L(d.note))}</p>`;
+ $("c").innerHTML=d.rules.length?`<ul class="rules">`+d.rules.map(r=>{const R=RULES[r];
+  return `<li><span class="badge b-${R.status}" title="${esc(t.statusTip[R.status])}">${esc(t.status[R.status])}</span>${esc(L(R))} <span class="ex">(${esc(R.ex)})</span>${R.note?`<div class="rnote">${esc(t.noteRule)} ${esc(L(R.note))}</div>`:""}<div>${chips(R.src)}</div></li>`}).join("")+"</ul>":`<p class="muted">${esc(d.special?L(d.note):t.none)}</p>`;
+ if(panel)drawPanel();}
+// ---------- panels
+function open(p,anchor){panel=p;pending=anchor||null;$("panel").hidden=false;$("scrim").hidden=false;document.body.style.overflow="hidden";drawPanel();$("p-close").focus();}
+function close(){panel=null;$("panel").hidden=true;$("scrim").hidden=true;document.body.style.overflow="";}
+function drawPanel(){const t=T[lang],id=$("dia").value,d=DIALECTS[id];
+ $("p-title").textContent=panel==="examples"?t.ex:t.so;
+ const tabs=$("p-tabs");
+ if(panel==="sources"){tabs.hidden=false;tabs.innerHTML=["src","res","log"].map(k=>`<button role="tab" data-tab="${k}" aria-selected="${tab===k}">${esc(t.tabs[k])}</button>`).join("");}else tabs.hidden=true;
+ const b=$("p-body");
+ b.innerHTML=panel==="examples"?examplesHTML(id,d,t):tab==="src"?sourcesHTML(t):tab==="res"?researchHTML(d,t):logHTML();
+ if(pending){const el=b.querySelector(`[data-id="${pending}"]`);if(el){el.scrollIntoView?.({block:"start"});el.classList.add("flash");}pending=null;}}
+function dialectSwitch(id){return `<label for="p-dia">${esc(T[lang].exFor)}</label><select id="p-dia">${Object.entries(GROUPS).map(([g,gd])=>`<optgroup label="${esc(L(gd))}">`+Object.entries(DIALECTS).filter(([,x])=>x.group===g).map(([k,x])=>`<option value="${k}"${k===id?" selected":""}>${esc(L(x))}</option>`).join("")+"</optgroup>").join("")}</select>`;}
+function examplesHTML(id,d,t){const list=(EXAMPLES[d.group]||[]).filter(e=>!e.only||e.only.includes(id));
+ let h=`<p class="muted">${esc(t.intro)}</p>`+dialectSwitch(id);
+ if(!list.length)return h+`<p>${esc(t.none2)}</p>`;
+ for(const [ty,td] of Object.entries(TYPES)){const items=list.filter(e=>e.type===ty);if(!items.length)continue;
+  h+=`<h3>${esc(L(td))}</h3>`+items.map(e=>`<div class="item"><div>${esc(L(e))}</div><div class="meta">${esc(e.cite)}</div>${e.try?`<button class="try small" data-try="${esc(e.try)}">${esc(t.tryIt)}</button>`:""}</div>`).join("");}
+ return h;}
+function sourcesHTML(t){const used={};for(const R of Object.values(RULES))for(const k of R.src)(used[k]=used[k]||new Set()).add(R.id);
+ const keys=Object.keys(SOURCES).sort((a,b)=>SOURCES[a].label.localeCompare(SOURCES[b].label,lang));
+ return keys.map(k=>{const s=SOURCES[k];return `<div class="item" data-id="${k}"><b>${esc(s.label)}</b>
+  <div class="meta"><b>${esc(t.cite)}:</b> ${esc(s.cite)}</div>
+  <div class="meta"><b>${esc(t.covers)}:</b> ${esc(L(s.covers))}</div>
+  <div class="meta"><b>${esc(t.areaS)}:</b> ${esc(L(s.area))}</div>
+  <div class="meta"><b>${esc(t.caveat)}:</b> ${esc(L(s.caveat))}</div>
+  <div class="meta"><b>${esc(t.lastRead)}:</b> ${esc(L(READ_LABEL[s.read]))}${used[k]?` · ${esc(T[lang].ruleCount(used[k].size))}`:""}</div>
+  <div class="meta"><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(t.open)} ↗</a></div></div>`}).join("");}
+function sect(sections){return sections.map(s=>`<h3>${esc(L(s.h))}</h3><ul>${s.i.map(i=>`<li>${esc(L(i))}</li>`).join("")}</ul>`).join("");}
+function researchHTML(d,t){const r=RESEARCH[FAMILY[d.group]];return `<p class="muted">${esc(t.resFor)} <b>${esc(L(r.title))}</b></p>`+sect(r.sections);}
+function logHTML(){return sect(LOG);}
+// ---------- events
+$("in").value=SAMPLES[0];$("in").oninput=update;$("dia").onchange=update;
+$("sample").onclick=()=>{sampleI=(sampleI+1)%SAMPLES.length;$("in").value=SAMPLES[sampleI];update();};
 $("lang").onclick=()=>{lang=lang==="ro"?"en":"ro";localStorage.setItem("lang",lang);render();};
+$("b-ex").onclick=()=>open("examples");$("b-so").onclick=()=>open("sources");
+$("p-close").onclick=close;$("scrim").onclick=close;
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&panel)close();});
+$("c").addEventListener("click",e=>{const b=e.target.closest("[data-src]");if(b){tab="src";open("sources",b.dataset.src);}});
+$("p-tabs").addEventListener("click",e=>{const b=e.target.closest("[data-tab]");if(b){tab=b.dataset.tab;drawPanel();}});
+$("p-body").addEventListener("click",e=>{const b=e.target.closest("[data-try]");if(b){$("in").value=b.dataset.try;update();close();}});
+$("p-body").addEventListener("change",e=>{if(e.target.id==="p-dia"){$("dia").value=e.target.value;update();}});
 render();

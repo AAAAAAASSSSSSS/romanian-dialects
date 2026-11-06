@@ -1,6 +1,17 @@
 # Graiuri
-Static app (no build step) for GitHub Pages: standard Romanian → dialect respelling + approximate IPA.
-Deploy: push, then Settings → Pages → branch `main`, root folder.
-- Rules: `js/rules.js` (each rule has status + source key). Banat and Moldavian are sourced; the rest are TODO.
-- Research notes: `docs/research/`; sources and corrections: `docs/SOURCES.md`; real literary examples: `docs/EXAMPLES.md`.
-- Dialects with rules so far: Banat, Moldavian, Bessarabian, Maramureș, and three Bukovinian varieties (Câmpulung, Rădăuți, SE/Dorna). Crișean and Ardelenesc added. Muntenian, Oltenian and Timok added (all listed dialects now have at least a first pass; see docs/SOURCES.md for what is thin).
+Static app for GitHub Pages: standard Romanian → how it could sound in a dialect (simplified respelling + approximate IPA). Romanian/English.
+
+I tried getting information from as many sources as possible. There are many questions left unanswered and many regions do not have dedicated research made.
+
+A page exists only where a source records a difference. Named varieties with no recorded difference are listed under "Research" (not indexed).
+
+## Structure
+- `js/dialects.js` – the 30 selectable pages (name, area, plain-language note, ordered rule list), grouped by region.
+- `js/rules.js` – every sound change / word list, bilingual, with status (`sourced` / `extended` / `approx`) and source keys.
+- `js/sources.js` – every source: full citation, what it covers and link.
+- `js/examples.js` – real literary/documentary/field-transcription examples per region.
+- `js/research.js` – research notes per region + the verification log.
+- `js/engine.js`, `js/app.js`, `css/style.css`, `index.html` – engine and UI.
+- `tests/run.mjs` (rule outputs vs. source examples), `tests/ui.mjs` (data completeness): `node tests/run.mjs && node tests/ui.mjs`.
+
+
