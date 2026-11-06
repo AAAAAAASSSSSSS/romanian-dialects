@@ -1,6 +1,7 @@
 import {DIALECTS,GROUPS} from "./dialects.js"; import {RULES} from "./rules.js"; import {toDialect,toIPA} from "./engine.js";
 import {SOURCES,READ_LABEL} from "./sources.js"; import {EXAMPLES,TYPES} from "./examples.js"; import {RESEARCH,FAMILY,LOG} from "./research.js";
 const $=id=>document.getElementById(id);
+const store={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const SAMPLES=["Dimineața, băiatul a venit cu pâine și brânză, apoi a fiert cinci ouă pentru cină.","Mâine merg la piață să cumpăr pește, vin și puțină brânză, dar nu știu când mă întorc.","Fratele meu a luat pâinea și a mers cu câinele după lemne, dar s-a întors seara.","Seara, fetele mele vin acasă, mănâncă pâine cu miere și se uită la televizor."];
 const T={
@@ -20,10 +21,10 @@ const T={
   intro:"Real examples, found (not made up by the app). They change with the chosen dialect."}
 };
 const LEG=[["ć đ","tʃʲ dʒʲ","ro: „ci”, „gi” moi (Banat)","soft “ci”, “gi” (Banat)"],["ń ĺ ŕ","nʲ lʲ rʲ","n, l, r muiate","softened n, l, r"],["ʲ","","după literă: pronunție „muiată”, cu un i foarte scurt","after a letter: “softened”, with a very short i"],["ʰ","","o suflare de aer (aspirat): pʰ","a puff of air (aspirated): pʰ"],["ĥ","ɦʲ","un h sonor, muiat","a voiced, softened h"],["ł","ɫ","l „gros” (Oaș)","“dark” l (Oaș)"],["é","ɛ","e deschis (avea→avé)","open e (avea→avé)"],["î, â","ɨ","ca în „cînd”","as in Romanian “cînd”"],["ș, ț, ă","ʃ ts ə","ca în română","as in Romanian"]];
-let lang=(()=>{const s=localStorage.getItem("lang");if(s)return s;const l=(navigator.languages||[navigator.language||""]).some(x=>/^ro/i.test(x));const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||"";return(l||/Bucharest|Chisinau/.test(tz))?"ro":"en";})();
+let lang=(()=>{const s=store.get("lang");if(s)return s;const l=(navigator.languages||[navigator.language||""]).some(x=>/^ro/i.test(x));const tz=(()=>{try{return Intl.DateTimeFormat().resolvedOptions().timeZone}catch(e){return""}})()||"";return(l||/Bucharest|Chisinau/.test(tz))?"ro":"en";})();
 let sampleI=0, panel=null, tab="src", pending=null;
 const L=o=>o[lang];
-function fillSelect(){const sel=$("dia"),cur=localStorage.getItem("dia")||sel.value||"muntenesc";
+function fillSelect(){const sel=$("dia"),cur=store.get("dia")||sel.value||"muntenesc";
  sel.innerHTML=Object.entries(GROUPS).map(([g,gd])=>`<optgroup label="${esc(L(gd))}">`+Object.entries(DIALECTS).filter(([,d])=>d.group===g).map(([k,d])=>`<option value="${k}">${esc(L(d))}</option>`).join("")+"</optgroup>").join("");
  sel.value=DIALECTS[cur]?cur:"muntenesc";}
 function chips(keys){return keys.map(k=>`<button class="chip" data-src="${k}">${esc(SOURCES[k].label)}</button>`).join("");}
@@ -33,7 +34,7 @@ function render(){const t=T[lang];document.documentElement.lang=lang;
  $("b-ex").textContent="📖 "+t.ex;$("b-so").textContent="📚 "+t.so;
  $("legend-body").innerHTML="<table>"+LEG.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${lang==="ro"?r[2]:r[3]}</td></tr>`).join("")+"</table>";
  fillSelect();update();if(panel)drawPanel();}
-function update(){const t=T[lang],id=$("dia").value,d=DIALECTS[id],src=$("in").value;localStorage.setItem("dia",id);
+function update(){const t=T[lang],id=$("dia").value,d=DIALECTS[id],src=$("in").value;store.set("dia",id);
  $("w").textContent=toDialect(src,id);$("p").textContent=src?toIPA(toDialect(src,id)):"";
  $("info").innerHTML=`<h3>${esc(t.area)}</h3><p>${esc(L(d.area))}</p><h3>${esc(t.diff)}</h3><p>${esc(L(d.note))}</p>`;
  $("c").innerHTML=d.rules.length?`<ul class="rules">`+d.rules.map(r=>{const R=RULES[r];
@@ -71,7 +72,7 @@ function logHTML(){return sect(LOG);}
 // ---------- events
 $("in").value=SAMPLES[0];$("in").oninput=update;$("dia").onchange=update;
 $("sample").onclick=()=>{sampleI=(sampleI+1)%SAMPLES.length;$("in").value=SAMPLES[sampleI];update();};
-$("lang").onclick=()=>{lang=lang==="ro"?"en":"ro";localStorage.setItem("lang",lang);render();};
+$("lang").onclick=()=>{lang=lang==="ro"?"en":"ro";store.set("lang",lang);render();};
 $("b-ex").onclick=()=>open("examples");$("b-so").onclick=()=>open("sources");
 $("p-close").onclick=close;$("scrim").onclick=close;
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&panel)close();});

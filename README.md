@@ -15,3 +15,6 @@ A page exists only where a source records a difference. Named varieties with no 
 - `tests/run.mjs` (rule outputs vs. source examples), `tests/ui.mjs` (data completeness): `node tests/run.mjs && node tests/ui.mjs`.
 
 
+
+## Build
+The page loads `app.bundle.js` (a single classic script, so it also works when index.html is opened from disk). After editing anything in `js/`, run `npm i && npm run build`.

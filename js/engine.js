@@ -17,7 +17,7 @@ export function toDialect(text,id){
   let out=text;
   for(const rid of d.rules){
     const R=RULES[rid]; if(!R) throw new Error("missing rule "+rid);
-    const re=compile(R);
+    let re; try{re=compile(R);}catch(err){continue;} // old browsers without regex lookbehind skip that rule instead of crashing
     const sub=(...a)=>{const m=a[0];
       if(R.map){const k=m.toLowerCase(); const v=R.map[k]; return v===undefined?m:cap(m,v);}
       return cap(m,R.to.replace(/\$(\d)/g,(_,i)=>a[+i]??""));};

@@ -48,3 +48,4 @@ ul.rules li{background:var(--card);border:1px solid var(--line);border-radius:10
 #p-body ul{padding-left:1.1rem}#p-body li{margin:.3rem 0}
 #p-body a{color:var(--ac);word-break:break-all}
 #p-body .try{margin-top:.4rem}
+[hidden]{display:none!important}

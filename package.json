@@ -1,1 +1,1 @@
-{"type":"module"}
+{"type":"module","scripts":{"build":"esbuild js/app.js --bundle --format=iife --target=es2019 --outfile=app.bundle.js","test":"node tests/run.mjs && node tests/ui.mjs"},"devDependencies":{"esbuild":"*"}}
