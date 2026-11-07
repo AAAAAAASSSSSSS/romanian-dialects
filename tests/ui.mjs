@@ -1,5 +1,5 @@
 // smoke test: every panel renders without throwing, using a minimal DOM stub
-import {SOURCES} from "../js/sources.js"; import {EXAMPLES} from "../js/examples.js"; import {RESEARCH,FAMILY} from "../js/research.js"; import {DIALECTS} from "../js/dialects.js"; import {RULES} from "../js/rules.js";
+import {SOURCES} from "../js/sources.js"; import {EXAMPLES} from "../js/examples.js"; import {RESEARCH,FAMILY,ALTELE} from "../js/research.js"; import {DIALECTS} from "../js/dialects.js"; import {RULES} from "../js/rules.js";
 let bad=0;
 for(const [k,d] of Object.entries(DIALECTS)){ if(!RESEARCH[FAMILY[d.group]]){bad++;console.log("no research",k)} if(!EXAMPLES[d.group]){bad++;console.log("no examples",k)}
  if(!d.area?.ro||!d.area?.en||!d.note?.ro||!d.note?.en){bad++;console.log("missing bilingual",k)} if(!d.ro||!d.en){bad++;console.log("name",k)}}
