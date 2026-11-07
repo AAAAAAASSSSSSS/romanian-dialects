@@ -8,7 +8,7 @@ t("muntenesc","aripi aripă aici alea","aripi haripă aici halea");
 t("muntenesc","haină hoț albii","aină woț halbii");
 t("muntenesc","pentru de pe peste din dintre dintr-un","păntru dă pă păste dîn dîntre dîntr-un");
 t("muntenesc","deschid despart destupat desen","dăschid dăspart dăstupat desen");
-t("muntenesc_ne","piele bine fier vin miere","pʰʲiele bʰʲine fʰʲier vʰʲin mʲiere");
+t("muntenesc_ne","piele bine fier un vin miere","pʰʲiele bʰʲine fʰʲier un vʰʲin mʲiere");
 t("oltenesc","ochi seară singur zic","ojchi sară sîngur zîc");
 t("oltenesc_sud","fier vierme","fkʲer vgʲerme");
 // Moldavia
@@ -45,7 +45,14 @@ t("crisean","orb poate","wărb potʲe");
 t("maramuresean","zic jos pe","dzîc gios pă");
 t("maramuresean","fete cer","fétʲe cĕr");
 t("ardelenesc","pâine dorm coadă","pîne durm codă");
-t("ardelenesc_ne","fin vin","șin zin");
+t("ardelenesc_ne","fin vin roșu","șin zin roșu");
+// vin: verb and Friday stay, wine is softened
+t("moldovenesc_nord","fetele vin la mine vineri","feteli vin la nini vineri");
+t("moldovenesc_nord","eu vin și ei vin, el vine","eu vin șî ei vin, el vini");
+t("moldovenesc_nord","bea vin roșu și un vin bun","bé jin roșu șî un jin bun");
+t("moldovenesc_nord","vinul și vițelul","jinul șî jițălul");
+t("banatean","grumaz poveste","grumadz povjéstă");
+t("banatean","geană ginere","jʲeană jʲińeŕe");
 console.log(fail?fail+" FAILURES":"all tests passed");
 const S="Dimineața, băiatul a venit cu pâine și brânză, apoi a fiert cinci ouă pentru cină.";
 if(process.argv[2]) for(const k of Object.keys(DIALECTS)) console.log(k.padEnd(28),toDialect(S,k));

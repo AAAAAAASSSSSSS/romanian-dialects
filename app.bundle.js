@@ -12,20 +12,20 @@
     transilvania: { ro: "Transilvania", en: "Transylvania" }
   };
   var FIN = ["m_dropi", "m_afin", "m_efin"];
-  var MC1 = ["m_cea", "m_gea", "m_c", "m_g"];
+  var MC1 = ["m_cea", "m_c", "m_g"];
   var MLAB = ["m_pv", "m_p", "m_b", "m_m"];
   var MIA = ["m_ia1", "m_ia2", "m_oa"];
   var MOLD_N = ["m_old", "m_etym", "m_soft", "m_lov", "m_zic", "m_hv", "m_ao_w", "m_toti", "m_eafin", "m_dropi", "m_ea", "m_e", "m_i", ...MC1, ...MLAB, "mn_f", "mn_v", ...MIA, ...FIN];
   var MOLD_S = ["m_old", "m_etym", "m_soft", "m_lov", "m_zic", "m_toti", "m_eafin", "m_dropi", "m_ea", "m_e", "m_i", ...MC1, ...MLAB, "ms_f", "ms_v", ...MIA, ...FIN];
-  var BAS = ["m_old", "m_etym", "m_soft", "bas_ja", "bas_gio", "bas_old", "m_eafin", "m_dropi", "m_cea", "m_gea", "bas_ea", "m_ea", "m_e", "m_i", "m_c", "m_g", ...MLAB, "bas_f", "bas_v", ...MIA, ...FIN];
+  var BAS = ["m_old", "m_etym", "m_soft", "bas_ja", "bas_gio", "bas_old", "m_eafin", "m_dropi", "m_cea", "bas_ea", "m_ea", "m_e", "m_i", "m_c", "m_g", ...MLAB, "bas_f", "bas_v", ...MIA, ...FIN];
   var BAS_NORTH = BAS.slice();
   BAS_NORTH.splice(BAS_NORTH.indexOf("bas_old") + 1, 0, "m_ao_s");
-  var BAN = ["b_lex", "b_n", "b_je", "b_ie", "b_ea", "b_e", "b_i", "b_cea", "b_gea", "b_c", "b_g", "b_t", "b_d", "b_nn", "b_l", "b_r"];
+  var BAN = ["b_lex", "b_n", "b_je", "b_ie", "b_ea", "b_e", "b_i", "b_cea", "b_c", "b_g", "b_t", "b_d", "b_nn", "b_l", "b_r"];
   var CRI = ["cr_lex", "cr_sl", "cr_sea", "cr_se", "cr_si", "cr_o", "cr_oa", "cr_lea", "cr_le", "cr_g", "cr_ch", "cr_gh"];
   var CR_DENT = ["cr_t", "cr_d", "cr_n"];
   var CR_LAB = ["cr_p", "cr_b", "cr_m", "cr_f", "cr_v"];
   var ARD = ["ar_lex", "ar_dorm", "ar_sea", "ar_se", "ar_si", "ar_oa"];
-  var PRIM = ["bk_cea", "bk_gea", "bk_c", "bk_g", "bk_f2", "bk_v2"];
+  var PRIM = ["bk_c", "bk_g", "bk_f2", "bk_v2"];
   var DIALECTS = {
     /* ---- Muntenia and Oltenia ---- */
     muntenesc: D(
@@ -98,7 +98,7 @@
       "basarabia",
       "Basarabean (nord-est: Camenca\u2013R\xEEbni\u021Ba\u2013Dub\u0103sari)",
       "Bessarabian (north-east: Camenca\u2013R\xEEbni\u021Ba\u2013Dub\u0103sari)",
-      ["ne_lex", "m_old", "m_etym", "m_soft", "bas_ja", "bas_gio", "bas_u", "bas_old", "m_ao_s", "m_ia1", "m_ia2", "m_dropi", "ne_cea", "ne_gea", "bas_ea", "m_ea", "m_e", "m_i", "ne_c", "ne_g", "ne_f1", "ne_f2", "ne_v", "ne_p1", "ne_p2", "ne_b", "ne_m", "ne_ch", "ne_gh", ...FIN],
+      ["ne_lex", "m_old", "m_etym", "m_soft", "bas_ja", "bas_gio", "bas_u", "bas_old", "m_ao_s", "m_ia1", "m_ia2", "m_dropi", "ne_cea", "bas_ea", "m_ea", "m_e", "m_i", "ne_c", "ne_g", "ne_f1", "ne_f2", "ne_v", "ne_p1", "ne_p2", "ne_b", "ne_m", "ne_ch", "ne_gh", ...FIN],
       { ro: "Nord-estul Republicii Moldova, pe linia Camenca\u2013R\xEEbni\u021Ba\u2013Dub\u0103sari, \u0219i raionul Kotovsk (regiunea Odesa) \u2014 Sp\xEEnu 2009, pe baza Atlasului lingvistic moldovenesc \u0219i a anchetelor proprii.", en: "North-eastern Republic of Moldova, along the Camenca\u2013R\xEEbni\u021Ba\u2013Dub\u0103sari line, and Kotovsk district (Odesa region) \u2014 Sp\xEEnu 2009, based on the Moldavian Linguistic Atlas and her own surveys." },
       { ro: "Aici se \xEEntretaie tr\u0103s\u0103turi moldovene\u0219ti \u0219i maramure\u0219ene (sursa: nu e o arie unitar\u0103). Fa\u021B\u0103 de centru: ce/ci/ge/gi, f, v dau fricative muiate (cinci\u2192\u0219\u02B2in\u0219\u02B2, vin\u2192j\u02B2in), p\u2192c, b\u2192g, ch\u2192c, gh\u2192g, m\u2192\u0144, \u0219i forme proprii (ou\u0103\u2192oau\xEE, guler\u2192guliar, nepot\u2192niapot, necaz\u2192nacaz, s\u0103\u2192s\xEE).", en: "Moldavian and Maramure\u0219 traits cross here (the source: not a unitary area). Compared with the centre: ce/ci/ge/gi, f, v give softened fricatives (cinci\u2192\u0219\u02B2in\u0219\u02B2, vin\u2192j\u02B2in), p\u2192c, b\u2192g, ch\u2192c, gh\u2192g, m\u2192\u0144, and own forms (ou\u0103\u2192oau\xEE, guler\u2192guliar, nepot\u2192niapot, necaz\u2192nacaz, s\u0103\u2192s\xEE)." }
     ),
@@ -114,7 +114,7 @@
       "basarabia",
       "Basarabean (sud-vest: Cahul\u2013Ismail)",
       "Bessarabian (south-west: Cahul\u2013Ismail)",
-      BAS.filter((r) => !["m_cea", "m_gea", "m_c", "m_g"].includes(r)),
+      BAS.filter((r) => !["m_cea", "m_c", "m_g"].includes(r)),
       { ro: "Extremitatea sud-vestic\u0103 a Basarabiei, de la Cahul la Ismail, Chilia \u0219i V\xE2lcov (grupul \u201Esud-vest\u201D al lui Udler; Co\u0219eriu o consider\u0103 de tip muntean).", en: "Far south-western Bessarabia, from Cahul to Ismail, Kilia and Vylkove (Udler's \u201Csouth-west\u201D group; Co\u0219eriu considers it Wallachian-type)." },
       { ro: "Ca centrul, dar f\u0103r\u0103 \u0219/j din ce/ci/ge/gi: sursa (Sp\xEEnu 2009) spune c\u0103 \xEEn restul masivului moldovenesc se aude \u0219, j, \u201Ecu excep\u021Bia graiurilor de sud-vest\u201D, deci aici africatele r\u0103m\xE2n (cinci r\u0103m\xE2ne cinci). Sp\xEEnu 2009 e singura surs\u0103 citit\u0103; monografia lui Sp\xEEnu despre sud-vest (2002) nu am g\u0103sit-o online.", en: "Like the centre, but without \u0219/j from ce/ci/ge/gi: the source (Sp\xEEnu 2009) says that in the rest of the Moldavian block \u0219, j are heard, \u201Cexcept the south-western speech\u201D, so the affricates stay here (cinci stays cinci). Sp\xEEnu 2009 is the only source I read; Sp\xEEnu's monograph on the south-west (2002) was not available online." }
     ),
@@ -203,7 +203,7 @@
       "bucovina",
       "Bucovinean \u2013 sud-est, C\u0103jvana",
       "Bukovinian \u2013 south-east, C\u0103jvana",
-      ["bk_vel", "bk_cea", "bk_gea", "bk_c", "bk_g", "bk_ch", "bk_gh", "bk_tl", "bk_dl"],
+      ["bk_vel", "bk_c", "bk_g", "bk_ch", "bk_gh", "bk_tl", "bk_dl"],
       { ro: "C\u0103jvana, care p\u0103streaz\u0103 cele mai multe tr\u0103s\u0103turi transilv\u0103nene.", en: "C\u0103jvana, which keeps most Transylvanian features." },
       { ro: "Ca sud-estul, dar dentalele t, d sunt doar muiate, nu africatizate (frate\u2192frat\u02B2e, dinte\u2192d\u02B2inte).", en: "Like the south-east, but the dentals t, d are only softened, not africatized (frate\u2192frat\u02B2e, dinte\u2192d\u02B2inte)." }
     ),
@@ -222,7 +222,7 @@
       "Banat (general)",
       BAN,
       { ro: "Cara\u0219-Severin, Timi\u0219, sudul Aradului \u0219i al Hunedoarei, Banatul s\xE2rbesc; tranzi\u021Bie spre muntean \xEEn nord-vestul Olteniei (Gorj, Mehedin\u021Bi). Wikipedia EN.", en: "Cara\u0219-Severin, Timi\u0219, southern Arad and Hunedoara, Serbian Banat; transition to Wallachian in north-west Oltenia (Gorj, Mehedin\u021Bi). Wikipedia EN." },
-      { ro: "Dentalele \u0219i n, l, r se muiaz\u0103 \xEEnaintea lui e/i (frunte\u2192frun\u0107e, vine\u2192vi\u0144e, lemne\u2192\u013Aem\u0144e), ce/ci/ge/gi devin \u0219\u02B2/j\u02B2 (ceas\u2192\u0219\u02B2as), ie dup\u0103 labial\u0103 devine e (fier\u2192fer), e/i/ea dup\u0103 s/z/\u0219/j/\u021B \u0219i st devin \u0103/\xEE/a (singur\u2192s\xEEngur, poveste\u2192povest\u0103), e accentuat\u2192je \xEEnaintea altui e (verde\u2192vjer\u0111e), \u0219i dz se p\u0103streaz\u0103 \xEEn c\xE2teva cuvinte (zece\u2192dz\u0103\u0219\u02B2e, br\xE2nz\u0103\u2192br\xE2ndz\u0103).", en: "Dentals and n, l, r soften before e/i (frunte\u2192frun\u0107e, vine\u2192vi\u0144e, lemne\u2192\u013Aem\u0144e), ce/ci/ge/gi become \u0219\u02B2/j\u02B2 (ceas\u2192\u0219\u02B2as), ie after a labial becomes e (fier\u2192fer), e/i/ea after s/z/\u0219/j/\u021B and st become \u0103/\xEE/a (singur\u2192s\xEEngur, poveste\u2192povest\u0103), stressed e\u2192j\xE9 before another e (verde\u2192vj\xE9r\u0111e), and dz is kept in a few words (zece\u2192dz\u0103\u0219\u02B2e, br\xE2nz\u0103\u2192br\xE2ndz\u0103)." }
+      { ro: "Dentalele \u0219i n, l, r se muiaz\u0103 \xEEnaintea lui e/i (frunte\u2192frun\u0107e, vine\u2192vi\u0144e, lemne\u2192\u013Aem\u0144e), ce/ci/ge/gi devin \u0219\u02B2/j\u02B2 (ceas\u2192\u0219\u02B2as), ie dup\u0103 labial\u0103 devine e (fier\u2192fer), e/i/ea dup\u0103 s/z/\u0219/j/\u021B \u0219i st devin \u0103/\xEE/a (singur\u2192s\xEEngur, poveste\u2192povest\u0103), e accentuat\u2192je \xEEnaintea altui e (verde\u2192vjer\u0111e), \u0219i dz se p\u0103streaz\u0103 \xEEn c\xE2teva cuvinte (zece\u2192dz\u0103\u0219\u02B2e, br\xE2nz\u0103\u2192br\xE2ndz\u0103).", en: "Dentals and n, l, r soften before e/i (frunte\u2192frun\u0107e, vine\u2192vi\u0144e, lemne\u2192\u013Aem\u0144e), ce/ci/ge/gi become \u0219\u02B2/j\u02B2 (ceas\u2192\u0219\u02B2as), ie after a labial becomes e (fier\u2192fer), e/i/ea after s/z/\u0219/j/\u021B and st become \u0103/\xEE/a (singur\u2192s\xEEngur, poveste\u2192povest\u0103), stressed e\u2192j\xE9 before another e in a few words (fete\u2192fj\xE9\u0107e, verde\u2192vj\xE9r\u0111e), and dz is kept in a few words (zece\u2192dz\u0103\u0219\u02B2e, br\xE2nz\u0103\u2192br\xE2ndz\u0103)." }
     ),
     banatean_sv_timisoara: D(
       "banat",
@@ -311,6 +311,9 @@
   var S5 = "[sz\u0219j\u021B]";
   var R = (id, ro, en, from, to, ex, src, note) => ({ id, ro, en, from, to, ex, src: [].concat(src), ...note ? { note } : {} });
   var L = (id, ro, en, words, map, ex, src, note) => ({ id, ro, en, from: `${B0}(?:${words})${B1}`, map, protect: true, ex, src: [].concat(src), ...note ? { note } : {} });
+  var VCUE = "(?:un|ni\u0219te|de|cu|f\u0103r\u0103|din|\xEEn|la|pe|al|ai|ale|bun|alb|ro\u0219u|vechi|nou|dulce|acru|sec|bea|beau|bem|be\u021Bi|bei|beam|beai|b\u0103u|cump\u0103r|cump\u0103r\u0103|cump\u0103r\u0103m|cump\u0103rat|toarn\u0103|turnat|vinde|v\xE2nd)";
+  var VAFTER = "(?:ro\u0219u|alb|roz|vechi|bun|dulce|acru|sec)";
+  var VPAT = `(?:v(?=i)(?!in(?:e|eri|erea|\u0103)?${B1}|ii${B1})|(?<=${B0}${VCUE}\\s)v(?=in${B1})|v(?=in\\s${VAFTER}${B1}))`;
   var N = (ro, en) => ({ ro, en });
   var list = [];
   var add = (...r) => list.push(...r);
@@ -338,7 +341,7 @@
     R("wl_p", "NE \u0219i E Muntenia: p \xEEnaintea unei vocale din fa\u021B\u0103 e \u201Easpirat \u0219i muiat\u201D (piele\u2192p\u02B0\u02B2iele)", "NE and E Muntenia: p before a front vowel is aspirated and softened (piele\u2192p\u02B0\u02B2iele)", `p(?=i)`, "p\u02B0\u02B2", "piele\u2192p\u02B0\u02B2iele", "enwal"),
     R("wl_b", "NE \u0219i E Muntenia: bine\u2192b\u02B0\u02B2ine", "NE and E Muntenia: bine\u2192b\u02B0\u02B2ine", `b(?=i)`, "b\u02B0\u02B2", "bine\u2192b\u02B0\u02B2ine", "enwal"),
     R("wl_f", "NE \u0219i E Muntenia: fier\u2192f\u02B0\u02B2ier", "NE and E Muntenia: fier\u2192f\u02B0\u02B2ier", `f(?=i)`, "f\u02B0\u02B2", "fier\u2192f\u02B0\u02B2ier", "enwal"),
-    R("wl_v", "NE \u0219i E Muntenia: vin\u2192v\u02B0\u02B2in", "NE and E Muntenia: vin\u2192v\u02B0\u02B2in", `v(?=i)`, "v\u02B0\u02B2", "vin\u2192v\u02B0\u02B2in", "enwal"),
+    R("wl_v", "NE \u0219i E Muntenia: vin\u2192v\u02B0\u02B2in", "NE and E Muntenia: vin\u2192v\u02B0\u02B2in", VPAT, "v\u02B0\u02B2", "un vin\u2192un v\u02B0\u02B2in", "enwal"),
     R("wl_m", "NE \u0219i E Muntenia: miere\u2192m\u02B2iere", "NE and E Muntenia: miere\u2192m\u02B2iere", `m(?=i)`, "m\u02B2", "miere\u2192m\u02B2iere", "enwal"),
     R("ol_sea", "Oltenia: dup\u0103 s, z, \u0219, j, \u021B: ea\u2192a (sear\u0103\u2192sar\u0103, zeam\u0103\u2192zam\u0103, \u021Beap\u0103\u2192\u021Bap\u0103)", "Oltenia: after s, z, \u0219, j, \u021B: ea\u2192a (sear\u0103\u2192sar\u0103, zeam\u0103\u2192zam\u0103, \u021Beap\u0103\u2192\u021Bap\u0103)", `(${S5})ea`, "$1a", "sear\u0103\u2192sar\u0103", "enwal"),
     R("ol_se", "Oltenia: dup\u0103 s, z, \u0219, j, \u021B: e\u2192\u0103 (secure\u2192s\u0103cure, zer\u2192z\u0103r, \u021Bepu\u0219\u0103\u2192\u021B\u0103pu\u0219\u0103)", "Oltenia: after s, z, \u0219, j, \u021B: e\u2192\u0103 (secure\u2192s\u0103cure, zer\u2192z\u0103r, \u021Bepu\u0219\u0103\u2192\u021B\u0103pu\u0219\u0103)", `(${S5})e`, "$1\u0103", "secure\u2192s\u0103cure", "enwal"),
@@ -347,7 +350,7 @@
     R("ol_f1", "Sudul Olteniei: f \xEEnaintea unei vocale din fa\u021B\u0103 \u2192 fk\u02B2 (fier\u2192fk\u02B2er)", "Southern Oltenia: f before a front vowel \u2192 fk\u02B2 (fier\u2192fk\u02B2er)", "fi(?=e)", "fk\u02B2", "fier\u2192fk\u02B2er", "enwal"),
     R("ol_f2", "Sudul Olteniei: fi\u2192fk\u02B2i", "Southern Oltenia: fi\u2192fk\u02B2i", `f(?=i)`, "fk\u02B2", "fin\u2192fk\u02B2in", "enwal"),
     R("ol_v1", "Sudul Olteniei: v \xEEnaintea unei vocale din fa\u021B\u0103 \u2192 vg\u02B2 (vierme\u2192vg\u02B2erme)", "Southern Oltenia: v before a front vowel \u2192 vg\u02B2 (vierme\u2192vg\u02B2erme)", "vi(?=e)", "vg\u02B2", "vierme\u2192vg\u02B2erme", "enwal"),
-    R("ol_v2", "Sudul Olteniei: vi\u2192vg\u02B2i", "Southern Oltenia: vi\u2192vg\u02B2i", `v(?=i)`, "vg\u02B2", "vin\u2192vg\u02B2in", "enwal")
+    R("ol_v2", "Sudul Olteniei: vi\u2192vg\u02B2i", "Southern Oltenia: vi\u2192vg\u02B2i", VPAT, "vg\u02B2", "un vin\u2192un vg\u02B2in", "enwal")
   );
   add(
     L("m_old", "Forme vechi: fecior\u2192ficior, femeie\u2192fimeie (e neaccentuat \u2192 i)", "Old forms: fecior\u2192ficior, femeie\u2192fimeie (unstressed e \u2192 i)", "fecior|femeie", { fecior: "ficior", femeie: "fimeie" }, "fecior\u2192ficior", ["spinu09", "spinu18"]),
@@ -371,7 +374,6 @@
     R("m_e", "Dup\u0103 s, z, \u0219, j, \u021B: e\u2192\u0103 (semn\u2192s\u0103mn, \u0219ed\u2192\u0219\u0103d, vi\u021Bel\u2192vi\u021B\u0103l)", "After s, z, \u0219, j, \u021B: e\u2192\u0103 (semn\u2192s\u0103mn, \u0219ed\u2192\u0219\u0103d, vi\u021Bel\u2192vi\u021B\u0103l)", `(${S5})e`, "$1\u0103", "semn\u2192s\u0103mn", ["enmol", "spinu09", "spinu18"]),
     R("m_i", "Dup\u0103 s, z, \u0219, j, \u021B: i\u2192\xEE (singur\u2192s\xEEngur, zid\u2192z\xEEd, cu\u021Bit\u2192cu\u021B\xEEt)", "After s, z, \u0219, j, \u021B: i\u2192\xEE (singur\u2192s\xEEngur, zid\u2192z\xEEd, cu\u021Bit\u2192cu\u021B\xEEt)", `(${S5})i`, "$1\xEE", "singur\u2192s\xEEngur", ["enmol", "spinu09"]),
     R("m_cea", "cea\u2192\u0219a, gea\u2192ja (ceap\u0103\u2192\u0219ap\u0103)", "cea\u2192\u0219a, gea\u2192ja (ceap\u0103\u2192\u0219ap\u0103)", "c(e)a", "\u0219a", "ceap\u0103\u2192\u0219ap\u0103", "enmol"),
-    R("m_gea", "gea\u2192ja", "gea\u2192ja", "gea", "ja", "gean\u0103\u2192jan\u0103", "enmol"),
     R("m_c", "ce/ci \u2192 \u0219e/\u0219i, africata devine fricativ\u0103 (cin\u0103\u2192\u0219in\u0103, cinci\u2192\u0219in\u0219). Vocalele se schimb\u0103 \xEEnainte (cin\u0103, nu \u0219\xEEn\u0103)", "ce/ci \u2192 \u0219e/\u0219i, the affricate becomes a fricative (cin\u0103\u2192\u0219in\u0103, cinci\u2192\u0219in\u0219). Vowels change first (cin\u0103, not \u0219\xEEn\u0103)", `c(?=${FV})`, "\u0219", "cin\u0103\u2192\u0219in\u0103", ["enmol", "spinu18"]),
     R("m_g", "ge/gi \u2192 je/ji (s\xE2nge\u2192s\xE2nje, ginere\u2192jinere)", "ge/gi \u2192 je/ji (s\xE2nge\u2192s\xE2nje, ginere\u2192jinere)", `g(?=${FV})`, "j", "s\xE2nge\u2192s\xE2nje", ["enmol", "spinu18"]),
     R("m_dropi", "Dup\u0103 s, z, \u0219, j, \u021B: -i final (plural, persoana a 2-a) nu se mai aude (p\u0103rin\u021Bi\u2192p\u0103rin\u021B, vezi\u2192vez, cinci\u2192\u0219in\u0219)", "After s, z, \u0219, j, \u021B: final -i (plural, 2nd person) is no longer heard (p\u0103rin\u021Bi\u2192p\u0103rin\u021B, vezi\u2192vez, cinci\u2192\u0219in\u0219)", String.raw`(?<=\p{L})([szșjț]ʲ?)i(?!\p{L})`, "$1", "p\u0103rin\u021Bi\u2192p\u0103rin\u021B", ["enmol", "spinu09"]),
@@ -380,9 +382,9 @@
     R("m_b", "b \xEEnaintea unei vocale din fa\u021B\u0103 \u2192 ghi/ghe (bine\u2192ghine, albin\u0103\u2192alghin\u0103)", "b before a front vowel \u2192 ghi/ghe (bine\u2192ghine, albin\u0103\u2192alghin\u0103)", `b(?=i)`, "gh", "bine\u2192ghine", ["enmol", "guia20"]),
     R("m_m", "m \xEEnaintea unei vocale din fa\u021B\u0103 \u2192 ni/ne (miel\u2192niel, mire\u2192nire)", "m before a front vowel \u2192 ni/ne (miel\u2192niel, mire\u2192nire)", `m(?=i)`, "n", "miel\u2192niel", ["enmol", "guia20", "spinu18"]),
     R("mn_f", "Nordul Moldovei (la nord de linia Bac\u0103u\u2013Vaslui\u2013Hu\u0219i): f \u2192 \u0219 (fierbe\u2192\u0219ierbe)", "Northern Moldavia (north of the Bac\u0103u\u2013Vaslui\u2013Hu\u0219i line): f \u2192 \u0219 (fierbe\u2192\u0219ierbe)", `f(?=i)`, "\u0219", "fierbe\u2192\u0219ierbe", ["enmol", "guia20"]),
-    R("mn_v", "Nordul Moldovei: v \u2192 j (vi\u021Bel\u2192ji\u021B\u0103l)", "Northern Moldavia: v \u2192 j (vi\u021Bel\u2192ji\u021B\u0103l)", `v(?=i)`, "j", "vi\u021Bel\u2192ji\u021Bel", ["enmol", "guia20"]),
+    R("mn_v", "Nordul Moldovei: v \u2192 j (vi\u021Bel\u2192ji\u021B\u0103l)", "Northern Moldavia: v \u2192 j (vi\u021Bel\u2192ji\u021B\u0103l)", VPAT, "j", "vi\u021Bel\u2192ji\u021Bel", ["enmol", "guia20"]),
     R("ms_f", "Sudul Moldovei (la sud de linia Bac\u0103u\u2013Vaslui\u2013Hu\u0219i): f \u2192 h (fierbe\u2192hierbi)", "Southern Moldavia (south of the Bac\u0103u\u2013Vaslui\u2013Hu\u0219i line): f \u2192 h (fierbe\u2192hierbi)", `f(?=i)`, "h", "fierbe\u2192hierbe", ["enmol", "guia20"]),
-    R("ms_v", "Sudul Moldovei: v \u2192 \u0125, un h sonor muiat (vi\u021Bel\u2192\u0125i\u021B\u0103l)", "Southern Moldavia: v \u2192 \u0125, a voiced softened h (vi\u021Bel\u2192\u0125i\u021B\u0103l)", `v(?=i)`, "\u0125", "vi\u021Bel\u2192\u0125i\u021Bel", ["enmol", "guia20"]),
+    R("ms_v", "Sudul Moldovei: v \u2192 \u0125, un h sonor muiat (vi\u021Bel\u2192\u0125i\u021B\u0103l)", "Southern Moldavia: v \u2192 \u0125, a voiced softened h (vi\u021Bel\u2192\u0125i\u021B\u0103l)", VPAT, "\u0125", "vi\u021Bel\u2192\u0125i\u021Bel", ["enmol", "guia20"]),
     R("m_ia1", "ia\u2192ie la \xEEnceput de cuv\xE2nt (iarb\u0103\u2192ierb\u0103)", "ia\u2192ie at the start of a word (iarb\u0103\u2192ierb\u0103)", `${B0}ia`, "ie", "iarb\u0103\u2192ierb\u0103", "spinu09"),
     R("m_ia2", "ia\u2192ie dup\u0103 vocal\u0103 (b\u0103iat\u2192b\u0103iet, \xEEncuiat\u2192\xEEncuiet)", "ia\u2192ie after a vowel (b\u0103iat\u2192b\u0103iet, \xEEncuiat\u2192\xEEncuiet)", `(?<=[${V}])ia`, "ie", "b\u0103iat\u2192b\u0103iet", ["enmol", "spinu09"]),
     R("m_eafin", "-ea final \u2192 -\xE9 (avea\u2192av\xE9, spunea\u2192spun\xE9)", "final -ea \u2192 -\xE9 (avea\u2192av\xE9, spunea\u2192spun\xE9)", String.raw`(?<=\p{L})ea(?!\p{L})`, "\xE9", "avea\u2192av\xE9", "enmol"),
@@ -396,16 +398,15 @@
     L("bas_gio", "africata veche p\u0103strat\u0103 (mai ales la v\xE2rstnici): jos\u2192gios, joc\u2192gioc", "old affricate kept (mostly older speakers): jos\u2192gios, joc\u2192gioc", "jos|joc", { jos: "gios", joc: "gioc" }, "jos\u2192gios", "spinu18"),
     L("bas_u", "u etimologic \u2192 o: s\u0103pun\u2192sapon, fudul\u2192fodul", "etymological u \u2192 o: s\u0103pun\u2192sapon, fudul\u2192fodul", "s\u0103pun|fudul", { "s\u0103pun": "sapon", fudul: "fodul" }, "s\u0103pun\u2192sapon", "spinu09"),
     R("bas_f", "f \xEEnaintea unei vocale din fa\u021B\u0103 \u2192 \u0219 (fin\u2192\u0219in)", "f before a front vowel \u2192 \u0219 (fin\u2192\u0219in)", `f(?=i)`, "\u0219", "fin\u2192\u0219in", ["spinu18", "spinu09"]),
-    R("bas_v", "v \xEEnaintea unei vocale din fa\u021B\u0103 \u2192 j (vierme\u2192jierme)", "v before a front vowel \u2192 j (vierme\u2192jierme)", `v(?=i)`, "j", "vierme\u2192jierme", ["spinu18"]),
+    R("bas_v", "v \xEEnaintea unei vocale din fa\u021B\u0103 \u2192 j (vierme\u2192jierme)", "v before a front vowel \u2192 j (vierme\u2192jierme)", VPAT, "j", "vierme\u2192jierme", ["spinu18"]),
     L("bas_old", "vorbirea v\xE2rstnicilor: fasole\u2192fasuli, coco\u0219\u2192cuco\u0219", "older speakers: fasole\u2192fasuli, coco\u0219\u2192cuco\u0219", "fasole|coco\u0219", { fasole: "fasuli", "coco\u0219": "cuco\u0219" }, "fasole\u2192fasuli", "spinu18"),
     // north-east
     R("ne_cea", "NE: cea \u2192 \u0219\u02B2a", "NE: cea \u2192 \u0219\u02B2a", "cea", "\u0219\u02B2a", "ceap\u0103\u2192\u0219\u02B2ap\u0103", "spinu09"),
-    R("ne_gea", "NE: gea \u2192 j\u02B2a", "NE: gea \u2192 j\u02B2a", "gea", "j\u02B2a", "gean\u0103\u2192j\u02B2an\u0103", "spinu09"),
     R("ne_c", "NE: ce/ci \u2192 \u0219\u02B2e/\u0219\u02B2i, fricativ\u0103 muiat\u0103 (cinci\u2192\u0219\u02B2in\u0219\u02B2, cruce\u2192cru\u0219\u02B2e)", "NE: ce/ci \u2192 \u0219\u02B2e/\u0219\u02B2i, soft fricative (cinci\u2192\u0219\u02B2in\u0219\u02B2, cruce\u2192cru\u0219\u02B2e)", `c(?=${FV})`, "\u0219\u02B2", "cruce\u2192cru\u0219\u02B2e", "spinu09"),
     R("ne_g", "NE: ge/gi \u2192 j\u02B2e/j\u02B2i (argint\u2192arj\u02B2int)", "NE: ge/gi \u2192 j\u02B2e/j\u02B2i (argint\u2192arj\u02B2int)", `g(?=${FV})`, "j\u02B2", "argint\u2192arj\u02B2int", "spinu09"),
     R("ne_f1", "NE: fier\u2192\u0219\u02B2er", "NE: fier\u2192\u0219\u02B2er", "fi(?=e)", "\u0219\u02B2", "fier\u2192\u0219\u02B2er", "spinu09"),
     R("ne_f2", "NE: f \xEEnaintea lui i \u2192 \u0219\u02B2 (fin\u2192\u0219\u02B2in)", "NE: f before i \u2192 \u0219\u02B2 (fin\u2192\u0219\u02B2in)", `f(?=i)`, "\u0219\u02B2", "fin\u2192\u0219\u02B2in", "spinu09"),
-    R("ne_v", "NE: v \xEEnaintea lui i \u2192 j\u02B2 (vin\u2192j\u02B2in, vis\u2192j\u02B2is)", "NE: v before i \u2192 j\u02B2 (vin\u2192j\u02B2in, vis\u2192j\u02B2is)", `v(?=i)`, "j\u02B2", "vin\u2192j\u02B2in", "spinu09"),
+    R("ne_v", "NE: v \xEEnaintea lui i \u2192 j\u02B2 (vin\u2192j\u02B2in, vis\u2192j\u02B2is)", "NE: v before i \u2192 j\u02B2 (vin\u2192j\u02B2in, vis\u2192j\u02B2is)", VPAT, "j\u02B2", "un vin\u2192un j\u02B2in", "spinu09"),
     R("ne_p1", "NE: p \xEEnaintea lui ie \u2192 c (piept\u2192cept, piele\u2192cele)", "NE: p before ie \u2192 c (piept\u2192cept, piele\u2192cele)", "pi(?=e)", "c", "piele\u2192cele", "spinu09"),
     R("ne_p2", "NE: p \xEEnaintea lui i \u2192 ci (lupi\u2192luci)", "NE: p before i \u2192 ci (lupi\u2192luci)", `p(?=i)`, "c", "lupi\u2192luci", "spinu09"),
     R("ne_b", "NE: b \xEEnaintea lui i/e \u2192 g (bine\u2192gine, albin\u0103\u2192algin\u0103, be\u021Bu\u2192getu)", "NE: b before i/e \u2192 g (bine\u2192gine, albin\u0103\u2192algin\u0103, be\u021Bu\u2192getu)", `b(?=i)`, "g", "bine\u2192gine", "spinu09"),
@@ -443,7 +444,7 @@
   );
   add(
     R("bk_f", "f \xEEnaintea unei vocale din fa\u021B\u0103 \u2192 h (fierbe\u2192hierbe)", "f before a front vowel \u2192 h (fierbe\u2192hierbe)", `f(?=i)`, "h", "fierbe\u2192hierbe", "turc77"),
-    R("bk_v", "v \xEEnaintea unei vocale din fa\u021B\u0103 \u2192 \u0125, fricativ\u0103 palatal\u0103 sonor\u0103 (vi\u021Bel\u2192\u0125i\u021Bel)", "v before a front vowel \u2192 \u0125, a voiced palatal fricative (vi\u021Bel\u2192\u0125i\u021Bel)", `v(?=i)`, "\u0125", "vi\u021Bel\u2192\u0125i\u021Bel", "turc77"),
+    R("bk_v", "v \xEEnaintea unei vocale din fa\u021B\u0103 \u2192 \u0125, fricativ\u0103 palatal\u0103 sonor\u0103 (vi\u021Bel\u2192\u0125i\u021Bel)", "v before a front vowel \u2192 \u0125, a voiced palatal fricative (vi\u021Bel\u2192\u0125i\u021Bel)", VPAT, "\u0125", "vi\u021Bel\u2192\u0125i\u021Bel", "turc77"),
     R("bk_p", "labiala se p\u0103streaz\u0103 \xEEn grupul vechi: p\u2192pchi (piele\u2192pchiele)", "the labial is kept in the old group: p\u2192pchi (piele\u2192pchiele)", `p(?=i)`, "pch", "piele\u2192pchiele", "turc77"),
     R("bk_b", "b\u2192bghi (bine\u2192bghine)", "b\u2192bghi (bine\u2192bghine)", `b(?=i)`, "bgh", "bine\u2192bghine", "turc77"),
     R("bk_m", "m\u2192mni (mic\u2192mnic)", "m\u2192mni (mic\u2192mnic)", `m(?=i)`, "mn", "mic\u2192mnic", "turc77"),
@@ -460,11 +461,9 @@
     R("bk_tl", "t \xEEnaintea lui e/i \u2192 t\u02B2, dental\u0103 u\u0219or muiat\u0103 (frate\u2192frat\u02B2e)", "t before e/i \u2192 t\u02B2, a lightly softened dental (frate\u2192frat\u02B2e)", `t(?=${FV})`, "t\u02B2", "frate\u2192frat\u02B2e", "turc77"),
     R("bk_dl", "d \xEEnaintea lui e/i \u2192 d\u02B2 (dinte\u2192d\u02B2inte)", "d before e/i \u2192 d\u02B2 (dinte\u2192d\u02B2inte)", `d(?=${FV})`, "d\u02B2", "dinte\u2192d\u02B2inte", "turc77"),
     R("bk_c", "ce/ci \u2192 \u0219e/\u0219i (fricativizare; R\u0103d\u0103u\u021B, sud-est, Valea Putnei)", "ce/ci \u2192 \u0219e/\u0219i (fricativization; R\u0103d\u0103u\u021Bi, south-east, Valea Putnei)", `c(?=${FV})`, "\u0219", "cinci\u2192\u0219in\u0219i", "turc77"),
-    R("bk_cea", "cea\u2192\u0219a", "cea\u2192\u0219a", "c(e)a", "\u0219a", "ceap\u0103\u2192\u0219ap\u0103", "turc77"),
     R("bk_g", "ge/gi \u2192 je/ji", "ge/gi \u2192 je/ji", `g(?=${FV})`, "j", "ginere\u2192jinere", "turc77"),
-    R("bk_gea", "gea\u2192ja", "gea\u2192ja", "gea", "ja", "gean\u0103\u2192jan\u0103", "turc77"),
     R("bk_f2", "f \xEEnaintea unei vocale din fa\u021B\u0103 \u2192 \u0219 (fin\u2192\u0219in)", "f before a front vowel \u2192 \u0219 (fin\u2192\u0219in)", `f(?=i)`, "\u0219", "fin\u2192\u0219in", "turc77"),
-    R("bk_v2", "v \xEEnaintea unei vocale din fa\u021B\u0103 \u2192 j (vin\u2192jin)", "v before a front vowel \u2192 j (vin\u2192jin)", `v(?=i)`, "j", "vin\u2192jin", "turc77"),
+    R("bk_v2", "v \xEEnaintea unei vocale din fa\u021B\u0103 \u2192 j (vin\u2192jin)", "v before a front vowel \u2192 j (vin\u2192jin)", VPAT, "j", "un vin\u2192un jin", "turc77"),
     R("bk_vel", "e\u2192\u0103 dup\u0103 s, z, \u021B, \u0219, j, r c\xE2nd e e \xEEn pozi\u021Bie \u201Emoale\u201D (urmat de o silab\u0103 cu vocal\u0103 palatal\u0103) sau final (reci\u2192r\u0103ci, \u0219ed\u2192\u0219\u0103d)", "e\u2192\u0103 after s, z, \u021B, \u0219, j, r when e is in a \u201Csoft\u201D position (followed by a syllable with a palatal vowel) or final (reci\u2192r\u0103ci, \u0219ed\u2192\u0219\u0103d)", `([sz\u021B\u0219jr])e(?=[${C}]*(?:[ei]|(?!\\p{L})))`, "$1\u0103", "\u0219ed\u2192\u0219\u0103d", "turc77", N("Sursa spune c\u0103 velarizarea e \u201Ecurent\u0103\u201D \xEEn Dorna \u0219i \xEEn sud-estul \u201Eafricatizant\u201D.", "The source says velarization is \u201Ccurrent\u201D in Dorna and the \u201Cafricatizing\u201D south-east.")),
     R("bk_afin", "-\u0103 final \u2192 -\xEE (mam\u0103\u2192mam\xEE)", "final -\u0103 \u2192 -\xEE (mam\u0103\u2192mam\xEE)", String.raw`(?<=\p{L})ă(?!\p{L})`, "\xEE", "mam\u0103\u2192mam\xEE", "turc77"),
     R("bk_efin", "-e final \u2192 -i (lapte\u2192lapti)", "final -e \u2192 -i (lapte\u2192lapti)", String.raw`(?<=[${V}][^${V}\s]*[^${V}y\s])e(?!\p{L})`, "i", "lapte\u2192lapti", "turc77", N("Programul nu vede accentul (vezi nota de la Moldova).", "The program cannot see stress (see the note under Moldavia).")),
@@ -474,10 +473,10 @@
   add(
     L(
       "b_lex",
-      "dz p\u0103strat: zece\u2192dz\u0103\u0219\u02B2e, auzi\u2192audz, frunz\u0103\u2192frundz\u0103, br\xE2nz\u0103\u2192br\xE2ndz\u0103, buz\u0103\u2192budz\u0103, grumaz\u2192grumadz\u0103, m\xE2nz\u2192m\xE2ndz; zer\u2192dz\u0103r, zid\u2192dz\xEEd",
-      "dz kept: zece\u2192dz\u0103\u0219\u02B2e, auzi\u2192audz, frunz\u0103\u2192frundz\u0103, br\xE2nz\u0103\u2192br\xE2ndz\u0103, buz\u0103\u2192budz\u0103, grumaz\u2192grumadz\u0103, m\xE2nz\u2192m\xE2ndz; zer\u2192dz\u0103r, zid\u2192dz\xEEd",
+      "dz p\u0103strat: zece\u2192dz\u0103\u0219\u02B2e, auzi\u2192audz, frunz\u0103\u2192frundz\u0103, br\xE2nz\u0103\u2192br\xE2ndz\u0103, buz\u0103\u2192budz\u0103, grumaz\u2192grumadz, m\xE2nz\u2192m\xE2ndz; zer\u2192dz\u0103r, zid\u2192dz\xEEd",
+      "dz kept: zece\u2192dz\u0103\u0219\u02B2e, auzi\u2192audz, frunz\u0103\u2192frundz\u0103, br\xE2nz\u0103\u2192br\xE2ndz\u0103, buz\u0103\u2192budz\u0103, grumaz\u2192grumadz, m\xE2nz\u2192m\xE2ndz; zer\u2192dz\u0103r, zid\u2192dz\xEEd",
       "zece|auzi|frunz\u0103|br\xE2nz\u0103|buz\u0103|grumaz|m\xE2nz|zer|zid",
-      { zece: "dz\u0103\u0219\u02B2e", auzi: "audz", "frunz\u0103": "frundz\u0103", "br\xE2nz\u0103": "br\xE2ndz\u0103", "buz\u0103": "budz\u0103", grumaz: "grumadz\u0103", "m\xE2nz": "m\xE2ndz", zer: "dz\u0103r", zid: "dz\xEEd" },
+      { zece: "dz\u0103\u0219\u02B2e", auzi: "audz", "frunz\u0103": "frundz\u0103", "br\xE2nz\u0103": "br\xE2ndz\u0103", "buz\u0103": "budz\u0103", grumaz: "grumadz", "m\xE2nz": "m\xE2ndz", zer: "dz\u0103r", zid: "dz\xEEd" },
       "zece\u2192dz\u0103\u0219\u02B2e",
       "enban"
     ),
@@ -490,13 +489,12 @@
       "c\xE2ine\u2192c\xEE\u0144e",
       "enban"
     ),
-    R("b_je", "e accentuat \u2192 je c\xE2nd urmeaz\u0103 alt e \xEEn silaba urm\u0103toare (fete\u2192fj\xE9\u0107e, verde\u2192vj\xE9r\u0111e, pe\u0219te\u2192pj\xE9\u0219\u0107e, poveste\u2192povj\xE9st\u0103)", "stressed e \u2192 j\xE9 (open e) when another e follows in the next syllable (fete\u2192fj\xE9\u0107e, verde\u2192vj\xE9r\u0111e, pe\u0219te\u2192pj\xE9\u0219\u0107e, poveste\u2192povj\xE9st\u0103)", `(?<!i)e(?=[${C}]{1,3}e${B1})`, "j\xE9", "verde\u2192vj\xE9rde", "enban", N("Programul nu vede accentul; se aplic\u0103 la e din penultima silab\u0103 a cuvintelor terminate \xEEn -e.", "The program cannot see stress; it applies to the e in the second-to-last syllable of words ending in -e.")),
+    L("b_je", "e accentuat \u2192 j\xE9 (e deschis) c\xE2nd urmeaz\u0103 alt e \xEEn silaba urm\u0103toare, exact cuvintele din surs\u0103: muiere\u2192muj\xE9\u0155e, fete\u2192fj\xE9\u0107e, poveste\u2192povj\xE9st\u0103, verde\u2192vj\xE9r\u0111e, pe\u0219te\u2192pj\xE9\u0219\u0107e", "stressed e \u2192 j\xE9 (open e) when another e follows in the next syllable, exactly the source's words: muiere\u2192muj\xE9\u0155e, fete\u2192fj\xE9\u0107e, poveste\u2192povj\xE9st\u0103, verde\u2192vj\xE9r\u0111e, pe\u0219te\u2192pj\xE9\u0219\u0107e", "muiere|fete|poveste|verde|pe\u0219te", { muiere: "muj\xE9\u0155e", fete: "fj\xE9\u0107e", poveste: "povj\xE9st\u0103", verde: "vj\xE9r\u0111e", "pe\u0219te": "pj\xE9\u0219\u0107e" }, "fete\u2192fj\xE9\u0107e", "enban", N("Accentul nu se vede, a\u0219a c\u0103 regula e dat\u0103 doar pentru cuvintele-exemplu (ginere, cu accent pe prima silab\u0103, nu intr\u0103 aici). Formele sunt cele din surs\u0103: poveste are grupul st, deci e\u2192\u0103 \u0219i t nu se mai muiaz\u0103; la pe\u0219te grupul e \u0219t, deci t se muiaz\u0103.", "Stress is not visible, so the rule is given only for the example words (ginere, stressed on the first syllable, is not covered). The forms are the source's: poveste has the group st, so e\u2192\u0103 and t does not soften; in pe\u0219te the group is \u0219t, so t softens.")),
     R("b_ie", "dup\u0103 labial\u0103, ie\u2192e (fier\u2192fer, piele\u2192pele, piept\u2192pept, miercuri\u2192mercuri, vierme\u2192verme)", "after a labial, ie\u2192e (fier\u2192fer, piele\u2192pele, piept\u2192pept, miercuri\u2192mercuri, vierme\u2192verme)", `([pbfvm])ie(?=[${C}])`, "$1e", "fier\u2192fer", "enban"),
     R("b_ea", "dup\u0103 s, z, \u0219, j, \u021B \u0219i st: ea\u2192a (sear\u0103\u2192sar\u0103, steag\u2192stag)", "after s, z, \u0219, j, \u021B and st: ea\u2192a (sear\u0103\u2192sar\u0103, steag\u2192stag)", `(${SIB})ea`, "$1a", "sear\u0103\u2192sar\u0103", "enban"),
-    R("b_e", "dup\u0103 s, z, \u0219, j, \u021B \u0219i st: e\u2192\u0103 (semn\u2192s\u0103mn, poveste\u2192povest\u0103)", "after s, z, \u0219, j, \u021B and st: e\u2192\u0103 (semn\u2192s\u0103mn, poveste\u2192povest\u0103)", `(${SIB})e`, "$1\u0103", "semn\u2192s\u0103mn", "enban"),
+    R("b_e", "dup\u0103 s, z, \u0219, j, \u021B \u0219i st: e\u2192\u0103 (semn\u2192s\u0103mn, poveste\u2192povest\u0103)", "after s, z, \u0219, j, \u021B and st: e\u2192\u0103 (semn\u2192s\u0103mn, poveste\u2192povest\u0103)", `(${SIB})e`, "$1\u0103", "semn\u2192s\u0103mn", "enban", N("Dup\u0103 st, e\u2192\u0103, deci t nu mai e urmat de e: poveste\u2192povj\xE9st\u0103, ca \xEEn surs\u0103 ([povj\u025Bst\u0259]). La pe\u0219te grupul e \u0219t, nu st, de aceea t se muiaz\u0103: pj\xE9\u0219\u0107e.", "After st, e\u2192\u0103, so t is no longer followed by e: poveste\u2192povj\xE9st\u0103, as in the source ([povj\u025Bst\u0259]). In pe\u0219te the group is \u0219t, not st, which is why t softens: pj\xE9\u0219\u0107e.")),
     R("b_i", "dup\u0103 s, z, \u0219, j, \u021B \u0219i st: i\u2192\xEE (singur\u2192s\xEEngur, \u0219i\u2192\u0219\xEE)", "after s, z, \u0219, j, \u021B and st: i\u2192\xEE (singur\u2192s\xEEngur, \u0219i\u2192\u0219\xEE)", `(${SIB})i`, "$1\xEE", "singur\u2192s\xEEngur", "enban"),
     R("b_cea", "cea\u2192\u0219\u02B2a, gea\u2192j\u02B2a (ceas\u2192\u0219\u02B2as)", "cea\u2192\u0219\u02B2a, gea\u2192j\u02B2a (ceas\u2192\u0219\u02B2as)", "c(e)a", "\u0219\u02B2a", "ceas\u2192\u0219\u02B2as", "enban"),
-    R("b_gea", "gea\u2192j\u02B2a", "gea\u2192j\u02B2a", "gea", "j\u02B2a", "gean\u0103\u2192j\u02B2an\u0103", "enban"),
     R("b_c", "ce/ci \u2192 \u0219\u02B2e/\u0219\u02B2i (cin\u0103\u2192\u0219\u02B2in\u0103, cinci\u2192\u0219\u02B2in\u0219\u02B2)", "ce/ci \u2192 \u0219\u02B2e/\u0219\u02B2i (cin\u0103\u2192\u0219\u02B2in\u0103, cinci\u2192\u0219\u02B2in\u0219\u02B2)", `c(?=${FV})`, "\u0219\u02B2", "cin\u0103\u2192\u0219\u02B2in\u0103", "enban"),
     R("b_g", "ge/gi \u2192 j\u02B2e/j\u02B2i (fuge\u2192fuj\u02B2e, ginere\u2192j\u02B2inere, s\xE2nge\u2192s\xEEn j\u02B2e)", "ge/gi \u2192 j\u02B2e/j\u02B2i (fuge\u2192fuj\u02B2e, ginere\u2192j\u02B2inere)", `g(?=${FV})`, "j\u02B2", "fuge\u2192fuj\u02B2e", "enban"),
     R("b_t", "t \xEEnaintea lui e/i/ea \u2192 \u0107 (frunte\u2192frun\u0107e)", "t before e/i/ea \u2192 \u0107 (frunte\u2192frun\u0107e)", `t(?=${FV})`, "\u0107", "frunte\u2192frun\u0107e", ["enban", "danciu09", "guia15"]),
@@ -538,10 +536,10 @@
     R("cr_b", "nordul Cri\u0219anei: b \u2192 bd\u02B2 (bine\u2192bd\u02B2ine)", "northern Cri\u0219ana: b \u2192 bd\u02B2 (bine\u2192bd\u02B2ine)", `b(?=i)`, "bd\u02B2", "bine\u2192bd\u02B2ine", ["encri", "guia20"]),
     R("cr_m", "nordul Cri\u0219anei: m \u2192 mn\u02B2 (mic\u2192mn\u02B2ic)", "northern Cri\u0219ana: m \u2192 mn\u02B2 (mic\u2192mn\u02B2ic)", `m(?=i)`, "mn\u02B2", "mic\u2192mn\u02B2ic", ["encri", "guia20"]),
     R("cr_f", "nordul Cri\u0219anei: f \u2192 h\u02B2 (fierbe\u2192h\u02B2ierbe)", "northern Cri\u0219ana: f \u2192 h\u02B2 (fierbe\u2192h\u02B2ierbe)", `f(?=i)`, "h\u02B2", "fierbe\u2192h\u02B2ierbe", ["encri", "guia20"]),
-    R("cr_v", "nordul Cri\u0219anei: v \u2192 \u0125 (vi\u021Bel\u2192\u0125i\u021Bel)", "northern Cri\u0219ana: v \u2192 \u0125 (vi\u021Bel\u2192\u0125i\u021Bel)", `v(?=i)`, "\u0125", "vi\u021Bel\u2192\u0125i\u021Bel", ["encri", "guia20"]),
+    R("cr_v", "nordul Cri\u0219anei: v \u2192 \u0125 (vi\u021Bel\u2192\u0125i\u021Bel)", "northern Cri\u0219ana: v \u2192 \u0125 (vi\u021Bel\u2192\u0125i\u021Bel)", VPAT, "\u0125", "vi\u021Bel\u2192\u0125i\u021Bel", ["encri", "guia20"]),
     L("cr_moti", "\u021Aara Mo\u021Bilor: n \xEEntre vocale \u2192 r \xEEn cuvinte vechi: oameni\u2192wamir\u02B2, lumin\u0103\u2192lumn\u02B2ir\u0103", "\u021Aara Mo\u021Bilor: intervocalic n \u2192 r in old words: oameni\u2192wamir\u02B2, lumin\u0103\u2192lumn\u02B2ir\u0103", "oameni|lumin\u0103", { oameni: "wamir\u02B2", "lumin\u0103": "lumn\u02B2ir\u0103" }, "oameni\u2192wamir\u02B2", "encri"),
     R("cr_mt", "Mun\u021Bii Apuseni: t \xEEnaintea lui e/i \u2192 c, dentala se africatizeaz\u0103 (\u0219tiu\u2192\u0219ciu, vorbe\u0219te\u2192vorbe\u0219ce)", "Apuseni Mountains: t before e/i \u2192 c, the dental is africatized (\u0219tiu\u2192\u0219ciu, vorbe\u0219te\u2192vorbe\u0219ce)", `t(?=${FV})`, "c", "\u0219tiu\u2192\u0219ciu", "guia15"),
-    R("cr_mv", "\u021Aara Mo\u021Bilor \u0219i valea Cri\u0219ului Negru: v \u2192 \u0125 (vis\u2192\u0125is, vierme\u2192\u0125ierme)", "\u021Aara Mo\u021Bilor and Cri\u0219ul Negru valley: v \u2192 \u0125 (vis\u2192\u0125is, vierme\u2192\u0125ierme)", `v(?=${FV})`, "\u0125", "vis\u2192\u0125is", "guia20"),
+    R("cr_mv", "\u021Aara Mo\u021Bilor \u0219i valea Cri\u0219ului Negru: v \u2192 \u0125 (vis\u2192\u0125is, vierme\u2192\u0125ierme)", "\u021Aara Mo\u021Bilor and Cri\u0219ul Negru valley: v \u2192 \u0125 (vis\u2192\u0125is, vierme\u2192\u0125ierme)", VPAT, "\u0125", "vis\u2192\u0125is", "guia20"),
     R("cr_oas", "\u021Aara Oa\u0219ului: l \xEEnaintea unei consoane se velarizeaz\u0103 (alb\u2192a\u0142b)", "\u021Aara Oa\u0219ului: l before a consonant is velarized (alb\u2192a\u0142b)", `l(?=[${C}])`, "\u0142", "alb\u2192a\u0142b", "encri"),
     L("cr_oas2", "\u021Aara Oa\u0219ului: schimb\u2192\u0219timb, \u0219chiop\u2192\u0219tiop (grupul \u0219t' se depalatalizeaz\u0103)", "\u021Aara Oa\u0219ului: schimb\u2192\u0219timb, \u0219chiop\u2192\u0219tiop (the group \u0219t' is depalatalized)", "schimb|\u0219chiop", { schimb: "\u0219timb", "\u0219chiop": "\u0219tiop" }, "schimb\u2192\u0219timb", "guia15")
   );
@@ -573,7 +571,7 @@
     R("mar_b", "b \u2192 bd\u02B2 (bine\u2192bd\u02B2ine)", "b \u2192 bd\u02B2 (bine\u2192bd\u02B2ine)", `b(?=i)`, "bd\u02B2", "bine\u2192bd\u02B2ine", "enmar"),
     R("mar_m", "m \u2192 mn\u02B2 (mic\u2192mn\u02B2ic)", "m \u2192 mn\u02B2 (mic\u2192mn\u02B2ic)", `m(?=i)`, "mn\u02B2", "mic\u2192mn\u02B2ic", "enmar"),
     R("mar_f", "f \xEEnaintea lui i \u2192 s (s\u0103 fie\u2192s\u0103 sie)", "f before i \u2192 s (s\u0103 fie\u2192s\u0103 sie)", `f(?=i)`, "s", "fie\u2192sie", "enmar"),
-    R("mar_v", "v \xEEnaintea lui i \u2192 z (vierme\u2192zierme)", "v before i \u2192 z (vierme\u2192zierme)", `v(?=i)`, "z", "vierme\u2192zierme", "enmar")
+    R("mar_v", "v \xEEnaintea lui i \u2192 z (vierme\u2192zierme)", "v before i \u2192 z (vierme\u2192zierme)", VPAT, "z", "vierme\u2192zierme", "enmar")
   );
   add(
     L("ar_lex", "c\xE2ine\u2192c\xEEne, m\xE2ine\u2192m\xEEne, p\xE2ine\u2192p\xEEne", "c\xE2ine\u2192c\xEEne, m\xE2ine\u2192m\xEEne, p\xE2ine\u2192p\xEEne", "c\xE2ine|m\xE2ine|p\xE2ine", { "c\xE2ine": "c\xEEne", "m\xE2ine": "m\xEEne", "p\xE2ine": "p\xEEne" }, "p\xE2ine\u2192p\xEEne", "entra"),
@@ -590,7 +588,7 @@
     R("ar_b", "NE: b\u2192bg (albin\u0103\u2192albgin\u0103)", "NE: b\u2192bg (albin\u0103\u2192albgin\u0103)", `b(?=i)`, "bg", "albin\u0103\u2192albgin\u0103", "rus20"),
     R("ar_m", "NE: m\u2192m\u0144 (mic\u2192m\u0144ic, nimic\u2192nim\u0144ic)", "NE: m\u2192m\u0144 (mic\u2192m\u0144ic, nimic\u2192nim\u0144ic)", `m(?=i)`, "m\u0144", "lumin\u0103\u2192lum\u0144in\u0103", "rus20"),
     R("ar_f", "NE: f\u2192\u0219 \xEEnaintea lui i (fin\u2192\u0219in)", "NE: f\u2192\u0219 before i (fin\u2192\u0219in)", `f(?=i)`, "\u0219", "fin\u2192\u0219in", "rus20"),
-    R("ar_v", "NE: v\u2192z \xEEnaintea lui i (vin\u2192zin, vi\u021Bel\u2192zi\u021B\u0103l)", "NE: v\u2192z before i (vin\u2192zin, vi\u021Bel\u2192zi\u021B\u0103l)", `v(?=i)`, "z", "vin\u2192zin", "rus20")
+    R("ar_v", "NE: v\u2192z \xEEnaintea lui i (vin\u2192zin, vi\u021Bel\u2192zi\u021B\u0103l)", "NE: v\u2192z before i (vin\u2192zin, vi\u021Bel\u2192zi\u021B\u0103l)", VPAT, "z", "un vin\u2192un zin", "rus20")
   );
   var RULES = Object.fromEntries(list.map((r) => [r.id, r]));
 
@@ -887,6 +885,7 @@
         f("dz: Wikipedia d\u0103 zic\u2192dz\xEEc pentru moldoveneasc\u0103; Sp\xEEnu 2018 spune c\u0103 dz nu se p\u0103streaz\u0103 \xEEn Republica Moldova. Aplicat doar pe paginile din Rom\xE2nia.", "dz: Wikipedia gives zic\u2192dz\xEEc for Moldavian; Sp\xEEnu 2018 says dz is not kept in the Republic of Moldova. Applied only on the Romanian pages."),
         f("Wikipedia d\u0103 e\u2192\u0103 dup\u0103 v \xEEn lovesc\u2192lov\u0103sc, dar \xEEn acela\u0219i text vezi\u2192vjez: de aceea doar cuvintele din surs\u0103.", "Wikipedia gives e\u2192\u0103 after v in lovesc\u2192lov\u0103sc, but in the same text vezi\u2192vjez: hence only the source's words."),
         f("ia\u2192ie: Sp\xEEnu (2009) \xEEl d\u0103 la \xEEnceput de cuv\xE2nt \u0219i dup\u0103 vocal\u0103 (b\u0103iet, \xEEncuiet); Wikipedia d\u0103 exemplele b\u0103iat, \xEEncuiat. Aplica\u021Bia urmeaz\u0103 formularea lui Sp\xEEnu, deci \u0219i iarb\u0103\u2192ierb\u0103.", "ia\u2192ie: Sp\xEEnu (2009) gives it at the start of a word and after a vowel (b\u0103iet, \xEEncuiet); Wikipedia gives the examples b\u0103iat, \xEEncuiat. The app follows Sp\xEEnu's wording, so iarb\u0103\u2192ierb\u0103 too."),
+        f("vin: sursele dau f, v palatalizate (vin\u2192jin \u201Eb\u0103utura\u201D, vi\u021Bel, vierme, vis, viu), dar nu dau forme palatalizate pentru verbul a veni (eu vin, el vine, s\u0103 vin\u0103) \u0219i nici pentru vineri. Aplica\u021Bia nu muiaz\u0103 vin (verb), vine, vii, vin\u0103, vineri; vin (b\u0103utura) se muiaz\u0103 doar c\xE2nd are l\xE2ng\u0103 el un cuv\xE2nt care arat\u0103 c\u0103 e substantiv (un vin, de vin, bea vin, vin ro\u0219u/alb/bun). F\u0103r\u0103 context, vin r\u0103m\xE2ne nemodificat.", "vin: the sources give palatalized f, v (vin\u2192jin \u201Cthe drink\u201D, vi\u021Bel, vierme, vis, viu), but give no palatalized forms for the verb a veni (eu vin, el vine, s\u0103 vin\u0103) nor for vineri. The app does not soften vin (verb), vine, vii, vin\u0103, vineri; vin (the drink) is softened only when a word next to it shows it is a noun (un vin, de vin, bea vin, vin ro\u0219u/alb/bun). Without context, vin stays unchanged."),
         f("-ea final: Wikipedia d\u0103 \xE9 (avea\u2192av\xE9); Sp\xEEnu (2009) d\u0103 monoftongare cu a sau \u0103 (m\u0103sea\u2192m\u0103sa, curea\u2192cur\u0103, rea\u2192r\u0103) pentru nord-estul Republicii Moldova.", "final -ea: Wikipedia gives \xE9 (avea\u2192av\xE9); Sp\xEEnu (2009) gives monophthongization with a or \u0103 (m\u0103sea\u2192m\u0103sa, curea\u2192cur\u0103, rea\u2192r\u0103) for the north-east of the Republic of Moldova.")
       ),
       sec(
@@ -1087,6 +1086,7 @@
     }
   } };
   var esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+  var EMAIL = "aaaaaaasssssss@protonmail.com";
   var SAMPLES = ["Seara, b\u0103iatul a venit cu p\xE2ine \u0219i br\xE2nz\u0103, apoi a fiert cinci ou\u0103 pentru cin\u0103.", "M\xE2ine merg la pia\u021B\u0103 s\u0103 cump\u0103r pe\u0219te, vin \u0219i pu\u021Bin\u0103 br\xE2nz\u0103, dar nu \u0219tiu c\xE2nd m\u0103 \xEEntorc.", "Fratele meu a luat p\xE2inea \u0219i a mers cu c\xE2inele dup\u0103 lemne, dar s-a \xEEntors seara.", "Seara, fetele mele vin acas\u0103, m\u0103n\xE2nc\u0103 p\xE2ine cu miere \u0219i se uit\u0103 la televizor."];
   var T = {
     ro: {
@@ -1118,6 +1118,8 @@
       none2: "Nu sunt exemple pentru acest grai.",
       noteRule: "Not\u0103:",
       rules: "Reguli",
+      infoLabel: "Informa\u021Bii",
+      infoText: "este adresa de e-mail pentru \xEEntreb\u0103ri, raport\u0103ri \u0219i orice altceva.",
       intro: "Exemple reale."
     },
     en: {
@@ -1149,6 +1151,8 @@
       none2: "There are no examples for this dialect.",
       noteRule: "Note:",
       rules: "Rules",
+      infoLabel: "Information",
+      infoText: "is the email address for questions, reports and anything else.",
       intro: "Real examples."
     }
   };
@@ -1195,6 +1199,8 @@
     $("l-leg").textContent = t.legend;
     $("l-c").textContent = t.changes;
     $("lang").textContent = lang === "ro" ? "EN" : "RO";
+    $("info-btn").setAttribute("aria-label", t.infoLabel);
+    $("info-box").innerHTML = `<p><a href="mailto:${EMAIL}">${EMAIL}</a> ${t.infoText}</p>`;
     $("b-ex").textContent = "\u{1F4D6} " + t.ex;
     $("b-so").textContent = "\u{1F4DA} " + t.so;
     $("legend-body").innerHTML = "<table>" + LEG.map((r) => `<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${lang === "ro" ? r[2] : r[3]}</td></tr>`).join("") + "</table>";
@@ -1299,10 +1305,26 @@
   };
   $("b-ex").onclick = () => open("examples");
   $("b-so").onclick = () => open("sources");
+  var infoClose = () => {
+    $("info-box").hidden = true;
+    $("info-btn").setAttribute("aria-expanded", "false");
+  };
+  $("info-btn").onclick = (e) => {
+    e.stopPropagation();
+    const open2 = $("info-box").hidden;
+    $("info-box").hidden = !open2;
+    $("info-btn").setAttribute("aria-expanded", String(open2));
+  };
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest("#info-box")) infoClose();
+  });
   $("p-close").onclick = close;
   $("scrim").onclick = close;
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && panel) close();
+    if (e.key === "Escape") {
+      infoClose();
+      if (panel) close();
+    }
   });
   $("c").addEventListener("click", (e) => {
     const b = e.target.closest("[data-src]");

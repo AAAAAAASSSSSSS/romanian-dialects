@@ -6,6 +6,10 @@ const C="bcdfghjklmnprstvzșț", V="aeiouăâî", FV="[ei]";
 const SIB="(?:st|[szșjț])", S5="[szșjț]";
 const R=(id,ro,en,from,to,ex,src,note)=>({id,ro,en,from,to,ex,src:[].concat(src),...(note?{note}:{})});
 const L=(id,ro,en,words,map,ex,src,note)=>({id,ro,en,from:`${B0}(?:${words})${B1}`,map,protect:true,ex,src:[].concat(src),...(note?{note}:{})});
+// "vin": the verb (eu vin, ei vin, vine, vii, vină) and Friday (vineri) are NOT softened; "vin" (wine) is, when a noun cue is next to it.
+const VCUE="(?:un|niște|de|cu|fără|din|în|la|pe|al|ai|ale|bun|alb|roșu|vechi|nou|dulce|acru|sec|bea|beau|bem|beți|bei|beam|beai|bău|cumpăr|cumpără|cumpărăm|cumpărat|toarnă|turnat|vinde|vând)";
+const VAFTER="(?:roșu|alb|roz|vechi|bun|dulce|acru|sec)";
+const VPAT=`(?:v(?=i)(?!in(?:e|eri|erea|ă)?${B1}|ii${B1})|(?<=${B0}${VCUE}\\s)v(?=in${B1})|v(?=in\\s${VAFTER}${B1}))`;
 const N=(ro,en)=>({ro,en});
 const list=[];const add=(...r)=>list.push(...r);
 
@@ -20,7 +24,7 @@ L("wl_prep","Muntenia: după d, p, în prepoziții și prefixe: e→ă, i→î. 
 R("wl_p","NE și E Muntenia: p înaintea unei vocale din față e „aspirat și muiat” (piele→pʰʲiele)","NE and E Muntenia: p before a front vowel is aspirated and softened (piele→pʰʲiele)",`p(?=i)`,"pʰʲ","piele→pʰʲiele","enwal"),
 R("wl_b","NE și E Muntenia: bine→bʰʲine","NE and E Muntenia: bine→bʰʲine",`b(?=i)`,"bʰʲ","bine→bʰʲine","enwal"),
 R("wl_f","NE și E Muntenia: fier→fʰʲier","NE and E Muntenia: fier→fʰʲier",`f(?=i)`,"fʰʲ","fier→fʰʲier","enwal"),
-R("wl_v","NE și E Muntenia: vin→vʰʲin","NE and E Muntenia: vin→vʰʲin",`v(?=i)`,"vʰʲ","vin→vʰʲin","enwal"),
+R("wl_v","NE și E Muntenia: vin→vʰʲin","NE and E Muntenia: vin→vʰʲin",VPAT,"vʰʲ","un vin→un vʰʲin","enwal"),
 R("wl_m","NE și E Muntenia: miere→mʲiere","NE and E Muntenia: miere→mʲiere",`m(?=i)`,"mʲ","miere→mʲiere","enwal"),
 R("ol_sea","Oltenia: după s, z, ș, j, ț: ea→a (seară→sară, zeamă→zamă, țeapă→țapă)","Oltenia: after s, z, ș, j, ț: ea→a (seară→sară, zeamă→zamă, țeapă→țapă)",`(${S5})ea`,"$1a","seară→sară","enwal"),
 R("ol_se","Oltenia: după s, z, ș, j, ț: e→ă (secure→săcure, zer→zăr, țepușă→țăpușă)","Oltenia: after s, z, ș, j, ț: e→ă (secure→săcure, zer→zăr, țepușă→țăpușă)",`(${S5})e`,"$1ă","secure→săcure","enwal"),
@@ -29,7 +33,7 @@ R("ol_j","Oltenia: se adaugă j înaintea unui k muiat (ochi→ojchi, rachiu→r
 R("ol_f1","Sudul Olteniei: f înaintea unei vocale din față → fkʲ (fier→fkʲer)","Southern Oltenia: f before a front vowel → fkʲ (fier→fkʲer)","fi(?=e)","fkʲ","fier→fkʲer","enwal"),
 R("ol_f2","Sudul Olteniei: fi→fkʲi","Southern Oltenia: fi→fkʲi",`f(?=i)`,"fkʲ","fin→fkʲin","enwal"),
 R("ol_v1","Sudul Olteniei: v înaintea unei vocale din față → vgʲ (vierme→vgʲerme)","Southern Oltenia: v before a front vowel → vgʲ (vierme→vgʲerme)","vi(?=e)","vgʲ","vierme→vgʲerme","enwal"),
-R("ol_v2","Sudul Olteniei: vi→vgʲi","Southern Oltenia: vi→vgʲi",`v(?=i)`,"vgʲ","vin→vgʲin","enwal"),
+R("ol_v2","Sudul Olteniei: vi→vgʲi","Southern Oltenia: vi→vgʲi",VPAT,"vgʲ","un vin→un vgʲin","enwal"),
 );
 
 /* ===== Moldavian core (Wikipedia “Moldavian dialect”, Spînu 2009/2018, Guia 2020) ===== */
@@ -48,7 +52,6 @@ R("m_ea","După s, z, ș, j, ț: ea→a (seară→sară, zeamă→zamă, țeapă
 R("m_e","După s, z, ș, j, ț: e→ă (semn→sămn, șed→șăd, vițel→vițăl)","After s, z, ș, j, ț: e→ă (semn→sămn, șed→șăd, vițel→vițăl)",`(${S5})e`,"$1ă","semn→sămn",["enmol","spinu09","spinu18"]),
 R("m_i","După s, z, ș, j, ț: i→î (singur→sîngur, zid→zîd, cuțit→cuțît)","After s, z, ș, j, ț: i→î (singur→sîngur, zid→zîd, cuțit→cuțît)",`(${S5})i`,"$1î","singur→sîngur",["enmol","spinu09"]),
 R("m_cea","cea→șa, gea→ja (ceapă→șapă)","cea→șa, gea→ja (ceapă→șapă)","c(e)a","șa","ceapă→șapă","enmol"),
-R("m_gea","gea→ja","gea→ja","gea","ja","geană→jană","enmol"),
 R("m_c","ce/ci → șe/și, africata devine fricativă (cină→șină, cinci→șinș). Vocalele se schimbă înainte (cină, nu șînă)","ce/ci → șe/și, the affricate becomes a fricative (cină→șină, cinci→șinș). Vowels change first (cină, not șînă)",`c(?=${FV})`,"ș","cină→șină",["enmol","spinu18"]),
 R("m_g","ge/gi → je/ji (sânge→sânje, ginere→jinere)","ge/gi → je/ji (sânge→sânje, ginere→jinere)",`g(?=${FV})`,"j","sânge→sânje",["enmol","spinu18"]),
 R("m_dropi","După s, z, ș, j, ț: -i final (plural, persoana a 2-a) nu se mai aude (părinți→părinț, vezi→vez, cinci→șinș)","After s, z, ș, j, ț: final -i (plural, 2nd person) is no longer heard (părinți→părinț, vezi→vez, cinci→șinș)",String.raw`(?<=\p{L})([szșjț]ʲ?)i(?!\p{L})`,"$1","părinți→părinț",["enmol","spinu09"]),
@@ -57,9 +60,9 @@ R("m_p","p înaintea unei vocale din față → chi/che (piatră→chiatră, Pet
 R("m_b","b înaintea unei vocale din față → ghi/ghe (bine→ghine, albină→alghină)","b before a front vowel → ghi/ghe (bine→ghine, albină→alghină)",`b(?=i)`,"gh","bine→ghine",["enmol","guia20"]),
 R("m_m","m înaintea unei vocale din față → ni/ne (miel→niel, mire→nire)","m before a front vowel → ni/ne (miel→niel, mire→nire)",`m(?=i)`,"n","miel→niel",["enmol","guia20","spinu18"]),
 R("mn_f","Nordul Moldovei (la nord de linia Bacău–Vaslui–Huși): f → ș (fierbe→șierbe)","Northern Moldavia (north of the Bacău–Vaslui–Huși line): f → ș (fierbe→șierbe)",`f(?=i)`,"ș","fierbe→șierbe",["enmol","guia20"]),
-R("mn_v","Nordul Moldovei: v → j (vițel→jițăl)","Northern Moldavia: v → j (vițel→jițăl)",`v(?=i)`,"j","vițel→jițel",["enmol","guia20"]),
+R("mn_v","Nordul Moldovei: v → j (vițel→jițăl)","Northern Moldavia: v → j (vițel→jițăl)",VPAT,"j","vițel→jițel",["enmol","guia20"]),
 R("ms_f","Sudul Moldovei (la sud de linia Bacău–Vaslui–Huși): f → h (fierbe→hierbi)","Southern Moldavia (south of the Bacău–Vaslui–Huși line): f → h (fierbe→hierbi)",`f(?=i)`,"h","fierbe→hierbe",["enmol","guia20"]),
-R("ms_v","Sudul Moldovei: v → ĥ, un h sonor muiat (vițel→ĥițăl)","Southern Moldavia: v → ĥ, a voiced softened h (vițel→ĥițăl)",`v(?=i)`,"ĥ","vițel→ĥițel",["enmol","guia20"]),
+R("ms_v","Sudul Moldovei: v → ĥ, un h sonor muiat (vițel→ĥițăl)","Southern Moldavia: v → ĥ, a voiced softened h (vițel→ĥițăl)",VPAT,"ĥ","vițel→ĥițel",["enmol","guia20"]),
 R("m_ia1","ia→ie la început de cuvânt (iarbă→ierbă)","ia→ie at the start of a word (iarbă→ierbă)",`${B0}ia`,"ie","iarbă→ierbă","spinu09"),
 R("m_ia2","ia→ie după vocală (băiat→băiet, încuiat→încuiet)","ia→ie after a vowel (băiat→băiet, încuiat→încuiet)",`(?<=[${V}])ia`,"ie","băiat→băiet",["enmol","spinu09"]),
 R("m_eafin","-ea final → -é (avea→avé, spunea→spuné)","final -ea → -é (avea→avé, spunea→spuné)",String.raw`(?<=\p{L})ea(?!\p{L})`,"é","avea→avé","enmol"),
@@ -75,16 +78,15 @@ R("bas_ea","ea→a când în silaba următoare e un a/ă (meargă→margă, sear
 L("bas_gio","africata veche păstrată (mai ales la vârstnici): jos→gios, joc→gioc","old affricate kept (mostly older speakers): jos→gios, joc→gioc","jos|joc",{jos:"gios",joc:"gioc"},"jos→gios","spinu18"),
 L("bas_u","u etimologic → o: săpun→sapon, fudul→fodul","etymological u → o: săpun→sapon, fudul→fodul","săpun|fudul",{"săpun":"sapon",fudul:"fodul"},"săpun→sapon","spinu09"),
 R("bas_f","f înaintea unei vocale din față → ș (fin→șin)","f before a front vowel → ș (fin→șin)",`f(?=i)`,"ș","fin→șin",["spinu18","spinu09"]),
-R("bas_v","v înaintea unei vocale din față → j (vierme→jierme)","v before a front vowel → j (vierme→jierme)",`v(?=i)`,"j","vierme→jierme",["spinu18"]),
+R("bas_v","v înaintea unei vocale din față → j (vierme→jierme)","v before a front vowel → j (vierme→jierme)",VPAT,"j","vierme→jierme",["spinu18"]),
 L("bas_old","vorbirea vârstnicilor: fasole→fasuli, cocoș→cucoș","older speakers: fasole→fasuli, cocoș→cucoș","fasole|cocoș",{fasole:"fasuli","cocoș":"cucoș"},"fasole→fasuli","spinu18"),
 // north-east
 R("ne_cea","NE: cea → șʲa","NE: cea → șʲa","cea","șʲa","ceapă→șʲapă","spinu09"),
-R("ne_gea","NE: gea → jʲa","NE: gea → jʲa","gea","jʲa","geană→jʲană","spinu09"),
 R("ne_c","NE: ce/ci → șʲe/șʲi, fricativă muiată (cinci→șʲinșʲ, cruce→crușʲe)","NE: ce/ci → șʲe/șʲi, soft fricative (cinci→șʲinșʲ, cruce→crușʲe)",`c(?=${FV})`,"șʲ","cruce→crușʲe","spinu09"),
 R("ne_g","NE: ge/gi → jʲe/jʲi (argint→arjʲint)","NE: ge/gi → jʲe/jʲi (argint→arjʲint)",`g(?=${FV})`,"jʲ","argint→arjʲint","spinu09"),
 R("ne_f1","NE: fier→șʲer","NE: fier→șʲer","fi(?=e)","șʲ","fier→șʲer","spinu09"),
 R("ne_f2","NE: f înaintea lui i → șʲ (fin→șʲin)","NE: f before i → șʲ (fin→șʲin)",`f(?=i)`,"șʲ","fin→șʲin","spinu09"),
-R("ne_v","NE: v înaintea lui i → jʲ (vin→jʲin, vis→jʲis)","NE: v before i → jʲ (vin→jʲin, vis→jʲis)",`v(?=i)`,"jʲ","vin→jʲin","spinu09"),
+R("ne_v","NE: v înaintea lui i → jʲ (vin→jʲin, vis→jʲis)","NE: v before i → jʲ (vin→jʲin, vis→jʲis)",VPAT,"jʲ","un vin→un jʲin","spinu09"),
 R("ne_p1","NE: p înaintea lui ie → c (piept→cept, piele→cele)","NE: p before ie → c (piept→cept, piele→cele)","pi(?=e)","c","piele→cele","spinu09"),
 R("ne_p2","NE: p înaintea lui i → ci (lupi→luci)","NE: p before i → ci (lupi→luci)",`p(?=i)`,"c","lupi→luci","spinu09"),
 R("ne_b","NE: b înaintea lui i/e → g (bine→gine, albină→algină, bețu→getu)","NE: b before i/e → g (bine→gine, albină→algină, bețu→getu)",`b(?=i)`,"g","bine→gine","spinu09"),
@@ -113,7 +115,7 @@ R("nt_sea","ea→a după consoană dură (seară→sară, bușească→bușască
 /* ===== Bukovina (Turculeț 1977–78, Guia 2015/2020) ===== */
 add(
 R("bk_f","f înaintea unei vocale din față → h (fierbe→hierbe)","f before a front vowel → h (fierbe→hierbe)",`f(?=i)`,"h","fierbe→hierbe","turc77"),
-R("bk_v","v înaintea unei vocale din față → ĥ, fricativă palatală sonoră (vițel→ĥițel)","v before a front vowel → ĥ, a voiced palatal fricative (vițel→ĥițel)",`v(?=i)`,"ĥ","vițel→ĥițel","turc77"),
+R("bk_v","v înaintea unei vocale din față → ĥ, fricativă palatală sonoră (vițel→ĥițel)","v before a front vowel → ĥ, a voiced palatal fricative (vițel→ĥițel)",VPAT,"ĥ","vițel→ĥițel","turc77"),
 R("bk_p","labiala se păstrează în grupul vechi: p→pchi (piele→pchiele)","the labial is kept in the old group: p→pchi (piele→pchiele)",`p(?=i)`,"pch","piele→pchiele","turc77"),
 R("bk_b","b→bghi (bine→bghine)","b→bghi (bine→bghine)",`b(?=i)`,"bgh","bine→bghine","turc77"),
 R("bk_m","m→mni (mic→mnic)","m→mni (mic→mnic)",`m(?=i)`,"mn","mic→mnic","turc77"),
@@ -130,11 +132,9 @@ R("bk_d","d înaintea lui e/i → g (dinte→gince)","d before e/i → g (dinte�
 R("bk_tl","t înaintea lui e/i → tʲ, dentală ușor muiată (frate→fratʲe)","t before e/i → tʲ, a lightly softened dental (frate→fratʲe)",`t(?=${FV})`,"tʲ","frate→fratʲe","turc77"),
 R("bk_dl","d înaintea lui e/i → dʲ (dinte→dʲinte)","d before e/i → dʲ (dinte→dʲinte)",`d(?=${FV})`,"dʲ","dinte→dʲinte","turc77"),
 R("bk_c","ce/ci → șe/și (fricativizare; Rădăuț, sud-est, Valea Putnei)","ce/ci → șe/și (fricativization; Rădăuți, south-east, Valea Putnei)",`c(?=${FV})`,"ș","cinci→șinși","turc77"),
-R("bk_cea","cea→șa","cea→șa","c(e)a","șa","ceapă→șapă","turc77"),
 R("bk_g","ge/gi → je/ji","ge/gi → je/ji",`g(?=${FV})`,"j","ginere→jinere","turc77"),
-R("bk_gea","gea→ja","gea→ja","gea","ja","geană→jană","turc77"),
 R("bk_f2","f înaintea unei vocale din față → ș (fin→șin)","f before a front vowel → ș (fin→șin)",`f(?=i)`,"ș","fin→șin","turc77"),
-R("bk_v2","v înaintea unei vocale din față → j (vin→jin)","v before a front vowel → j (vin→jin)",`v(?=i)`,"j","vin→jin","turc77"),
+R("bk_v2","v înaintea unei vocale din față → j (vin→jin)","v before a front vowel → j (vin→jin)",VPAT,"j","un vin→un jin","turc77"),
 R("bk_vel","e→ă după s, z, ț, ș, j, r când e e în poziție „moale” (urmat de o silabă cu vocală palatală) sau final (reci→răci, șed→șăd)","e→ă after s, z, ț, ș, j, r when e is in a “soft” position (followed by a syllable with a palatal vowel) or final (reci→răci, șed→șăd)",`([szțșjr])e(?=[${C}]*(?:[ei]|(?!\\p{L})))`,"$1ă","șed→șăd","turc77",N("Sursa spune că velarizarea e „curentă” în Dorna și în sud-estul „africatizant”.","The source says velarization is “current” in Dorna and the “africatizing” south-east.")),
 R("bk_afin","-ă final → -î (mamă→mamî)","final -ă → -î (mamă→mamî)",String.raw`(?<=\p{L})ă(?!\p{L})`,"î","mamă→mamî","turc77"),
 R("bk_efin","-e final → -i (lapte→lapti)","final -e → -i (lapte→lapti)",String.raw`(?<=[${V}][^${V}\s]*[^${V}y\s])e(?!\p{L})`,"i","lapte→lapti","turc77",N("Programul nu vede accentul (vezi nota de la Moldova).","The program cannot see stress (see the note under Moldavia).")),
@@ -144,17 +144,16 @@ L("cs_lex","Coșna: a înaintea accentului → ă (pahar→păhar, capac→căpa
 
 /* ===== Banat ===== */
 add(
-L("b_lex","dz păstrat: zece→dzășʲe, auzi→audz, frunză→frundză, brânză→brândză, buză→budză, grumaz→grumadză, mânz→mândz; zer→dzăr, zid→dzîd","dz kept: zece→dzășʲe, auzi→audz, frunză→frundză, brânză→brândză, buză→budză, grumaz→grumadză, mânz→mândz; zer→dzăr, zid→dzîd",
- "zece|auzi|frunză|brânză|buză|grumaz|mânz|zer|zid",{zece:"dzășʲe",auzi:"audz","frunză":"frundză","brânză":"brândză","buză":"budză",grumaz:"grumadză","mânz":"mândz",zer:"dzăr",zid:"dzîd"},"zece→dzășʲe","enban"),
+L("b_lex","dz păstrat: zece→dzășʲe, auzi→audz, frunză→frundză, brânză→brândză, buză→budză, grumaz→grumadz, mânz→mândz; zer→dzăr, zid→dzîd","dz kept: zece→dzășʲe, auzi→audz, frunză→frundză, brânză→brândză, buză→budză, grumaz→grumadz, mânz→mândz; zer→dzăr, zid→dzîd",
+ "zece|auzi|frunză|brânză|buză|grumaz|mânz|zer|zid",{zece:"dzășʲe",auzi:"audz","frunză":"frundză","brânză":"brândză","buză":"budză",grumaz:"grumadz","mânz":"mândz",zer:"dzăr",zid:"dzîd"},"zece→dzășʲe","enban"),
 L("b_n","n muiat păstrat: cui→cuń, călcâi→călcîń, căpătâi→căpătîń, rămâi→rămîń, claie→clańe, sicriu→săcriń; câine→cîńe, mâine→mîńe, pâine→pîńe","etymological n kept soft: cui→cuń, călcâi→călcîń, căpătâi→căpătîń, rămâi→rămîń, claie→clańe, sicriu→săcriń; câine→cîńe, mâine→mîńe, pâine→pîńe",
  "cui|călcâi|căpătâi|rămâi|claie|sicriu|câine|mâine|pâine",{cui:"cuń","călcâi":"călcîń","căpătâi":"căpătîń","rămâi":"rămîń",claie:"clańe",sicriu:"săcriń","câine":"cîńe","mâine":"mîńe","pâine":"pîńe"},"câine→cîńe","enban"),
-R("b_je","e accentuat → je când urmează alt e în silaba următoare (fete→fjéće, verde→vjérđe, pește→pjéșće, poveste→povjéstă)","stressed e → jé (open e) when another e follows in the next syllable (fete→fjéće, verde→vjérđe, pește→pjéșće, poveste→povjéstă)",`(?<!i)e(?=[${C}]{1,3}e${B1})`,"jé","verde→vjérde","enban",N("Programul nu vede accentul; se aplică la e din penultima silabă a cuvintelor terminate în -e.","The program cannot see stress; it applies to the e in the second-to-last syllable of words ending in -e.")),
+L("b_je","e accentuat → jé (e deschis) când urmează alt e în silaba următoare, exact cuvintele din sursă: muiere→mujéŕe, fete→fjéće, poveste→povjéstă, verde→vjérđe, pește→pjéșće","stressed e → jé (open e) when another e follows in the next syllable, exactly the source's words: muiere→mujéŕe, fete→fjéće, poveste→povjéstă, verde→vjérđe, pește→pjéșće","muiere|fete|poveste|verde|pește",{muiere:"mujéŕe",fete:"fjéće",poveste:"povjéstă",verde:"vjérđe","pește":"pjéșće"},"fete→fjéće","enban",N("Accentul nu se vede, așa că regula e dată doar pentru cuvintele-exemplu (ginere, cu accent pe prima silabă, nu intră aici). Formele sunt cele din sursă: poveste are grupul st, deci e→ă și t nu se mai muiază; la pește grupul e șt, deci t se muiază.","Stress is not visible, so the rule is given only for the example words (ginere, stressed on the first syllable, is not covered). The forms are the source's: poveste has the group st, so e→ă and t does not soften; in pește the group is șt, so t softens.")),
 R("b_ie","după labială, ie→e (fier→fer, piele→pele, piept→pept, miercuri→mercuri, vierme→verme)","after a labial, ie→e (fier→fer, piele→pele, piept→pept, miercuri→mercuri, vierme→verme)",`([pbfvm])ie(?=[${C}])`,"$1e","fier→fer","enban"),
 R("b_ea","după s, z, ș, j, ț și st: ea→a (seară→sară, steag→stag)","after s, z, ș, j, ț and st: ea→a (seară→sară, steag→stag)",`(${SIB})ea`,"$1a","seară→sară","enban"),
-R("b_e","după s, z, ș, j, ț și st: e→ă (semn→sămn, poveste→povestă)","after s, z, ș, j, ț and st: e→ă (semn→sămn, poveste→povestă)",`(${SIB})e`,"$1ă","semn→sămn","enban"),
+R("b_e","după s, z, ș, j, ț și st: e→ă (semn→sămn, poveste→povestă)","after s, z, ș, j, ț and st: e→ă (semn→sămn, poveste→povestă)",`(${SIB})e`,"$1ă","semn→sămn","enban",N("După st, e→ă, deci t nu mai e urmat de e: poveste→povjéstă, ca în sursă ([povjɛstə]). La pește grupul e șt, nu st, de aceea t se muiază: pjéșće.","After st, e→ă, so t is no longer followed by e: poveste→povjéstă, as in the source ([povjɛstə]). In pește the group is șt, not st, which is why t softens: pjéșće.")),
 R("b_i","după s, z, ș, j, ț și st: i→î (singur→sîngur, și→șî)","after s, z, ș, j, ț and st: i→î (singur→sîngur, și→șî)",`(${SIB})i`,"$1î","singur→sîngur","enban"),
 R("b_cea","cea→șʲa, gea→jʲa (ceas→șʲas)","cea→șʲa, gea→jʲa (ceas→șʲas)","c(e)a","șʲa","ceas→șʲas","enban"),
-R("b_gea","gea→jʲa","gea→jʲa","gea","jʲa","geană→jʲană","enban"),
 R("b_c","ce/ci → șʲe/șʲi (cină→șʲină, cinci→șʲinșʲ)","ce/ci → șʲe/șʲi (cină→șʲină, cinci→șʲinșʲ)",`c(?=${FV})`,"șʲ","cină→șʲină","enban"),
 R("b_g","ge/gi → jʲe/jʲi (fuge→fujʲe, ginere→jʲinere, sânge→sîn jʲe)","ge/gi → jʲe/jʲi (fuge→fujʲe, ginere→jʲinere)",`g(?=${FV})`,"jʲ","fuge→fujʲe","enban"),
 R("b_t","t înaintea lui e/i/ea → ć (frunte→frunće)","t before e/i/ea → ć (frunte→frunće)",`t(?=${FV})`,"ć","frunte→frunće",["enban","danciu09","guia15"]),
@@ -192,10 +191,10 @@ R("cr_p","nordul Crișanei: p înaintea lui i → ptʲ (piele→ptʲele)","north
 R("cr_b","nordul Crișanei: b → bdʲ (bine→bdʲine)","northern Crișana: b → bdʲ (bine→bdʲine)",`b(?=i)`,"bdʲ","bine→bdʲine",["encri","guia20"]),
 R("cr_m","nordul Crișanei: m → mnʲ (mic→mnʲic)","northern Crișana: m → mnʲ (mic→mnʲic)",`m(?=i)`,"mnʲ","mic→mnʲic",["encri","guia20"]),
 R("cr_f","nordul Crișanei: f → hʲ (fierbe→hʲierbe)","northern Crișana: f → hʲ (fierbe→hʲierbe)",`f(?=i)`,"hʲ","fierbe→hʲierbe",["encri","guia20"]),
-R("cr_v","nordul Crișanei: v → ĥ (vițel→ĥițel)","northern Crișana: v → ĥ (vițel→ĥițel)",`v(?=i)`,"ĥ","vițel→ĥițel",["encri","guia20"]),
+R("cr_v","nordul Crișanei: v → ĥ (vițel→ĥițel)","northern Crișana: v → ĥ (vițel→ĥițel)",VPAT,"ĥ","vițel→ĥițel",["encri","guia20"]),
 L("cr_moti","Țara Moților: n între vocale → r în cuvinte vechi: oameni→wamirʲ, lumină→lumnʲiră","Țara Moților: intervocalic n → r in old words: oameni→wamirʲ, lumină→lumnʲiră","oameni|lumină",{oameni:"wamirʲ","lumină":"lumnʲiră"},"oameni→wamirʲ","encri"),
 R("cr_mt","Munții Apuseni: t înaintea lui e/i → c, dentala se africatizează (știu→șciu, vorbește→vorbeșce)","Apuseni Mountains: t before e/i → c, the dental is africatized (știu→șciu, vorbește→vorbeșce)",`t(?=${FV})`,"c","știu→șciu","guia15"),
-R("cr_mv","Țara Moților și valea Crișului Negru: v → ĥ (vis→ĥis, vierme→ĥierme)","Țara Moților and Crișul Negru valley: v → ĥ (vis→ĥis, vierme→ĥierme)",`v(?=${FV})`,"ĥ","vis→ĥis","guia20"),
+R("cr_mv","Țara Moților și valea Crișului Negru: v → ĥ (vis→ĥis, vierme→ĥierme)","Țara Moților and Crișul Negru valley: v → ĥ (vis→ĥis, vierme→ĥierme)",VPAT,"ĥ","vis→ĥis","guia20"),
 R("cr_oas","Țara Oașului: l înaintea unei consoane se velarizează (alb→ałb)","Țara Oașului: l before a consonant is velarized (alb→ałb)",`l(?=[${C}])`,"ł","alb→ałb","encri"),
 L("cr_oas2","Țara Oașului: schimb→știmb, șchiop→știop (grupul șt' se depalatalizează)","Țara Oașului: schimb→știmb, șchiop→știop (the group șt' is depalatalized)","schimb|șchiop",{schimb:"știmb","șchiop":"știop"},"schimb→știmb","guia15"),
 );
@@ -222,7 +221,7 @@ R("mar_p","p înaintea lui i → ptʲ (piele→ptʲele)","p before i → ptʲ (p
 R("mar_b","b → bdʲ (bine→bdʲine)","b → bdʲ (bine→bdʲine)",`b(?=i)`,"bdʲ","bine→bdʲine","enmar"),
 R("mar_m","m → mnʲ (mic→mnʲic)","m → mnʲ (mic→mnʲic)",`m(?=i)`,"mnʲ","mic→mnʲic","enmar"),
 R("mar_f","f înaintea lui i → s (să fie→să sie)","f before i → s (să fie→să sie)",`f(?=i)`,"s","fie→sie","enmar"),
-R("mar_v","v înaintea lui i → z (vierme→zierme)","v before i → z (vierme→zierme)",`v(?=i)`,"z","vierme→zierme","enmar"),
+R("mar_v","v înaintea lui i → z (vierme→zierme)","v before i → z (vierme→zierme)",VPAT,"z","vierme→zierme","enmar"),
 );
 
 /* ===== Transylvania ===== */
@@ -241,6 +240,6 @@ R("ar_p","NE: p→pc (piele→pcele)","NE: p→pc (piele→pcele)",`p(?=i)`,"pc"
 R("ar_b","NE: b→bg (albină→albgină)","NE: b→bg (albină→albgină)",`b(?=i)`,"bg","albină→albgină","rus20"),
 R("ar_m","NE: m→mń (mic→mńic, nimic→nimńic)","NE: m→mń (mic→mńic, nimic→nimńic)",`m(?=i)`,"mń","lumină→lumńină","rus20"),
 R("ar_f","NE: f→ș înaintea lui i (fin→șin)","NE: f→ș before i (fin→șin)",`f(?=i)`,"ș","fin→șin","rus20"),
-R("ar_v","NE: v→z înaintea lui i (vin→zin, vițel→zițăl)","NE: v→z before i (vin→zin, vițel→zițăl)",`v(?=i)`,"z","vin→zin","rus20"),
+R("ar_v","NE: v→z înaintea lui i (vin→zin, vițel→zițăl)","NE: v→z before i (vin→zin, vițel→zițăl)",VPAT,"z","un vin→un zin","rus20"),
 );
 export const RULES=Object.fromEntries(list.map(r=>[r.id,r]));

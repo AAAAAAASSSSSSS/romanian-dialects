@@ -3,6 +3,7 @@ import {SOURCES} from "./sources.js"; import {EXAMPLES,TYPES} from "./examples.j
 const $=id=>document.getElementById(id);
 const store={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const EMAIL="aaaaaaasssssss@protonmail.com";
 const SAMPLES=["Seara, băiatul a venit cu pâine și brânză, apoi a fiert cinci ouă pentru cină.","Mâine merg la piață să cumpăr pește, vin și puțină brânză, dar nu știu când mă întorc.","Fratele meu a luat pâinea și a mers cu câinele după lemne, dar s-a întors seara.","Seara, fetele mele vin acasă, mănâncă pâine cu miere și se uită la televizor."];
 const T={
  ro:{title:"Graiuri românești",sub:"Scrie un text în română standard și vezi cum ar suna într-un grai. Pentru fiecare regulă poți vedea sursa și zona în care a fost studiată.",std:"Text în română standard",dia:"Grai",
@@ -10,13 +11,13 @@ const T={
   changes:"Ce se schimbă în acest grai",none:"Nu sunt reguli redabile în scris pentru acest grai.",area:"Zona",diff:"Ce îl deosebește",ex:"Exemple",so:"Surse",
   tabs:{src:"Surse (A–Z)",res:"Cercetare"},resFor:"Cercetare pentru:",cite:"Citare",covers:"Ce conține",areaS:"Unde s-a cules",caveat:"Rezerve",open:"Deschide sursa",
   exFor:"Exemple pentru:",tryIt:"Pune textul în câmp",none2:"Nu sunt exemple pentru acest grai.",noteRule:"Notă:",rules:"Reguli",
-  intro:"Exemple reale."},
+  infoLabel:"Informații",infoText:"este adresa de e-mail pentru întrebări, raportări și orice altceva.",intro:"Exemple reale."},
  en:{title:"Romanian dialects",sub:"Type standard Romanian and see how it might sound in a dialect. For every rule you can see the source, and the area where it was studied.",std:"Standard Romanian text",dia:"Dialect",
   w:"How it sounds (simplified respelling)",wh:"special letters: see the legend",p:"IPA (approximate)",ph:"Type some text…",sample:"↻ Another example",legend:"How to read the special letters",
   changes:"What changes in this dialect",none:"No rules that can be shown in writing for this dialect.",area:"Area",diff:"What sets it apart",ex:"Examples",so:"Sources",
   tabs:{src:"Sources (A–Z)",res:"Research"},resFor:"Research for:",cite:"Citation",covers:"What it covers",areaS:"Where it was collected",caveat:"Caveats",open:"Open the source",
   exFor:"Examples for:",tryIt:"Put this text in the box",none2:"There are no examples for this dialect.",noteRule:"Note:",rules:"Rules",
-  intro:"Real examples."}
+  infoLabel:"Information",infoText:"is the email address for questions, reports and anything else.",intro:"Real examples."}
 };
 const LEG=[["ć đ","tʃʲ dʒʲ","ro: „ci”, „gi” moi (Banat)","soft “ci”, “gi” (Banat)"],["ń ĺ ŕ","nʲ lʲ rʲ","n, l, r muiate","softened n, l, r"],["ʲ","","după literă: pronunție „muiată”, cu un i foarte scurt","after a letter: “softened”, with a very short i"],["ʰ","","o suflare de aer (aspirat): pʰ","a puff of air (aspirated): pʰ"],["ĥ","ɦʲ","un h sonor, muiat","a voiced, softened h"],["ł","ɫ","l „gros” (Oaș)","“dark” l (Oaș)"],["é, jé","ɛ","e deschis (avea→avé, fete→féte)","open e (avea→avé, fete→féte)"],["ĕ","ə","e central după c, g (cer→cĕr): c, g rămân ca în „ce”","central e after c, g (cer→cĕr): c, g stay as in “ce”"],["șʲ jʲ","ʃʲ ʒʲ","ș, j muiate","softened ș, j"],["î, â","ɨ","ca în „când”","as in Romanian “când”"],["ș, ț, ă","ʃ ts ə","ca în română","as in Romanian"]];
 let lang=(()=>{const s=store.get("lang");if(s)return s;const l=(navigator.languages||[navigator.language||""]).some(x=>/^ro/i.test(x));const tz=(()=>{try{return Intl.DateTimeFormat().resolvedOptions().timeZone}catch(e){return""}})()||"";return(l||/Bucharest|Chisinau/.test(tz))?"ro":"en";})();
@@ -30,7 +31,7 @@ function chips(keys){return keys.map(k=>`<button class="chip" data-src="${k}">${
 function render(){const t=T[lang];document.documentElement.lang=lang;
  $("title").textContent=t.title;$("sub").textContent=t.sub;$("l-std").textContent=t.std;$("l-dia").textContent=t.dia;$("l-w").textContent=t.w;$("h-w").textContent=t.wh;$("l-p").textContent=t.p;
  $("in").placeholder=t.ph;$("sample").textContent=t.sample;$("l-leg").textContent=t.legend;$("l-c").textContent=t.changes;$("lang").textContent=lang==="ro"?"EN":"RO";
- $("b-ex").textContent="📖 "+t.ex;$("b-so").textContent="📚 "+t.so;
+ $("info-btn").setAttribute("aria-label",t.infoLabel);$("info-box").innerHTML=`<p><a href="mailto:${EMAIL}">${EMAIL}</a> ${t.infoText}</p>`;$("b-ex").textContent="📖 "+t.ex;$("b-so").textContent="📚 "+t.so;
  $("legend-body").innerHTML="<table>"+LEG.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${lang==="ro"?r[2]:r[3]}</td></tr>`).join("")+"</table>";
  fillSelect();update();if(panel)drawPanel();}
 function update(){const t=T[lang],id=$("dia").value,d=DIALECTS[id],src=$("in").value;
@@ -72,8 +73,11 @@ $("in").value=SAMPLES[0];$("in").oninput=update;$("dia").onchange=update;
 $("sample").onclick=()=>{sampleI=(sampleI+1)%SAMPLES.length;$("in").value=SAMPLES[sampleI];update();};
 $("lang").onclick=()=>{lang=lang==="ro"?"en":"ro";store.set("lang",lang);render();};
 $("b-ex").onclick=()=>open("examples");$("b-so").onclick=()=>open("sources");
+const infoClose=()=>{$("info-box").hidden=true;$("info-btn").setAttribute("aria-expanded","false");};
+$("info-btn").onclick=e=>{e.stopPropagation();const open=$("info-box").hidden;$("info-box").hidden=!open;$("info-btn").setAttribute("aria-expanded",String(open));};
+document.addEventListener("click",e=>{if(!e.target.closest("#info-box"))infoClose();});
 $("p-close").onclick=close;$("scrim").onclick=close;
-document.addEventListener("keydown",e=>{if(e.key==="Escape"&&panel)close();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){infoClose();if(panel)close();}});
 $("c").addEventListener("click",e=>{const b=e.target.closest("[data-src]");if(b){tab="src";open("sources",b.dataset.src);}});
 $("p-tabs").addEventListener("click",e=>{const b=e.target.closest("[data-tab]");if(b){tab=b.dataset.tab;drawPanel();}});
 $("p-body").addEventListener("click",e=>{const b=e.target.closest("[data-try]");if(b){$("in").value=b.dataset.try;update();close();}});
